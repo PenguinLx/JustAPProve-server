@@ -12,6 +12,7 @@ public class Alternativa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	//@Getter
 	private boolean correta;
 	private String descricao;
 	

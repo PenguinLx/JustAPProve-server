@@ -26,7 +26,7 @@ public class Materia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+	@Getter
 	protected String nome;
 	protected String descricao;
 	
