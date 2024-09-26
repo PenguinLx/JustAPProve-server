@@ -15,6 +15,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table
@@ -26,38 +28,15 @@ public class Materia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Getter
-	protected String nome;
-	protected String descricao;
+	
+	@Getter @Setter protected String nome;
+	@Getter @Setter protected String descricao;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "TipoMat")
-	protected TipoMateria tipo;
+	@Getter @Setter protected TipoMateria tipo;
 	//UMA MATERIA, MUITOS MATERIAIS(ONE TO MANY)
 	@OneToMany
 	@JoinColumn(name = "id")
-	protected List<Material> materiais;
-	
-	
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	public TipoMateria getTipo() {
-		return tipo;
-	}
-	public void setTipo(TipoMateria tipo) {
-		this.tipo = tipo;
-	}
-	
-	
-	
+	@Getter @Setter protected List<Material> materiais;
 }

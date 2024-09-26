@@ -11,6 +11,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table
@@ -19,28 +21,10 @@ public class Material {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String artigo;
-	private File video;
+	@Getter @Setter private String artigo;
+	@Getter @Setter private File video;
 	//https://stackoverflow.com/questions/65655237/spring-boot-making-another-entity-class-object-in-entity-class
 	
 	//private Materias materia;
-	
-	public String getArtigo() {
-		return artigo;
-	}
-	public void setArtigo(String artigo) {
-		this.artigo = artigo;
-	}
-	public File getVideo() {
-		return video;
-	}
-	public void setVideo(File video) {
-		this.video = video;
-	}
-	
-	
-	
-	
-	
 	
 }

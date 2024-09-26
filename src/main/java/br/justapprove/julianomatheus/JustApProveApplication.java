@@ -8,7 +8,6 @@ public class JustApProveApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(JustApProveApplication.class, args);
 	}
-	//INSTALAR LOMBOK: https://projectlombok.org/p2(eclipse "install new software")
 	
-
+//Repository vs DAO: https://stackoverflow.com/questions/59797882/is-jparepository-interface-covers-the-responsibilities-of-dao-interface-in-sprin
 }

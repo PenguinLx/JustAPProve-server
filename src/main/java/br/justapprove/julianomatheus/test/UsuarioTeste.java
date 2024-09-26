@@ -1,4 +1,4 @@
-package br.justapprove.julianomatheus;
+package br.justapprove.julianomatheus.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
