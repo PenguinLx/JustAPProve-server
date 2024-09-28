@@ -10,4 +10,7 @@ public class JustApProveApplication {
 	}
 	
 //Repository vs DAO: https://stackoverflow.com/questions/59797882/is-jparepository-interface-covers-the-responsibilities-of-dao-interface-in-sprin
+	
+	//usar service? : https://medium.com/@chandantechie/spring-boot-application-with-crud-operations-using-spring-data-jpa-and-mysql-23c8019660b1
+	
 }

@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Alternativa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@Getter private Integer id;
 	
 	@Getter @Setter private boolean correta;
 	

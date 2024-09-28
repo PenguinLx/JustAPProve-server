@@ -19,7 +19,7 @@ import lombok.Setter;
 public class Material {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@Getter private Integer id;
 	
 	@Getter @Setter private String artigo;
 	@Getter @Setter private File video;

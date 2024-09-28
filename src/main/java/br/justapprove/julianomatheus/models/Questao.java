@@ -18,7 +18,7 @@ import lombok.Setter;
 public class Questao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@Getter private Integer id;
 	@Getter @Setter private File descricao;
 	
 	@OneToMany

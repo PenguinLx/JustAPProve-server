@@ -27,7 +27,7 @@ public class Materia {
 	//problema de tipo - possivel soluçao = https://stackoverflow.com/questions/67825729/using-enums-in-a-spring-entity
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@Getter private Integer id;
 	
 	@Getter @Setter protected String nome;
 	@Getter @Setter protected String descricao;
