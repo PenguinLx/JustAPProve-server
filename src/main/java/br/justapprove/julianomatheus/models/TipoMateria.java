@@ -1,4 +1,4 @@
-package br.justapprove.julianomatheus;
+package br.justapprove.julianomatheus.models;
 
 public enum TipoMateria {
 Matematica,

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hibernate.annotations.JavaType;
 
-import br.justapprove.julianomatheus.TipoMateria;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
