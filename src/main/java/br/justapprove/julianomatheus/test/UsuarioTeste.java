@@ -17,8 +17,8 @@ public class UsuarioTeste {
 	private void run() {
 		Usuario usr = new Usuario();
 		//create
-		usr.setCpf("067.902.809-56");
 		usr.setNome("Rovalfo");
+		usr.setUserName("Cavalo_Doido");
 		usr.setSenha("hello_worlda");
 		usrRepo.save(usr);
 		//update

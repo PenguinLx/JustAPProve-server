@@ -25,20 +25,7 @@ public class Questao {
 	@JoinColumn(name = "id")
 	@Getter @Setter private List<Alternativa> alternativas;
 	
-//	
-//	public File getDescricao() {
-//		return descricao;
-//	}
-//	public void setDescricao(File descricao) {
-//		this.descricao = descricao;
-//	}
-//	public List<Alternativa> getAlternativas() {
-//		return alternativas;
-//	}
-//	public void setAlternativas(List<Alternativa> alternativas) {
-//		this.alternativas = alternativas;
-//	}
-	
+
 	
 
 }

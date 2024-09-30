@@ -25,20 +25,5 @@ public class Simulado {
 
 	@Getter @Setter private int pontos;
 
-//	public List<Questao> getQuestoes() {
-//		return questoes;
-//	}
-//
-//	public void setQuestoes(List<Questao> questoes) {
-//		this.questoes = questoes;
-//	}
-//
-//	public int getPontos() {
-//		return pontos;
-//	}
-//
-//	public void setPontos(int pontos) {
-//		this.pontos = pontos;
-//	}
 
 }
