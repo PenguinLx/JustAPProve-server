@@ -11,28 +11,28 @@ import br.justapprove.julianomatheus.models.Alternativa;
 import br.justapprove.julianomatheus.service.AlternativaService;
 
 @RestController
-@RequestMapping("/api/alternativa")
+@RequestMapping("/alternativa")
 public class AlternativaController {
 
 	@Autowired
 	private AlternativaService altService;
 
-	@PostMapping("/alternativa/save")
+	@PostMapping("/save")
 	public Alternativa saveAlternativa(Alternativa alternativa) {
 		return altService.saveAlternativa(alternativa);
 	}
 
-	@GetMapping("alternativa/read")
+	@GetMapping("/read")
 	public Alternativa readAlternativa(Alternativa alternativa) {
 		return altService.readAlternativa(alternativa);
 	}
 
-	@PostMapping("/alternativa/update")
+	@PostMapping("/update")
 	public Alternativa updateAlternativa(Alternativa alternativa) {
 		return altService.updateAlternativa(alternativa, alternativa.getId());
 	}
 
-	@DeleteMapping("alternativa/delete")
+	@DeleteMapping("/delete")
 	public void deleteAlternativa(Alternativa alternativa) {
 		altService.deleteAlternativaEntity(alternativa);
 	}

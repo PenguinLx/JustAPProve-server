@@ -11,29 +11,29 @@ import br.justapprove.julianomatheus.models.Material;
 import br.justapprove.julianomatheus.service.MaterialService;
 
 @RestController
-@RequestMapping("/api/material")
+@RequestMapping("/material")
 public class MaterialController {
 
 	@Autowired
 	private MaterialService matlService;
 	
 	
-	@PostMapping("/material/save")
+	@PostMapping("/save")
 	public Material saveMaterial(Material material) {
 		return matlService.saveMaterial(material);
 	}
 	
-	@GetMapping("/material/read")
+	@GetMapping("/read")
 	public Material readMaterial(Material material) {
 		return matlService.readMaterial(material);
 	}
 	
-	@PostMapping("/material/update")
+	@PostMapping("/update")
 	public Material updateMaterial(Material material) {
 		return matlService.updateMaterial(material, material.getId());
 	}
 	
-	@DeleteMapping("/material/delete")
+	@DeleteMapping("/delete")
 	public void deleteMaterial(Material material) {
 		matlService.deleteMaterialEntity(material);
 	}

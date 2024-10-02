@@ -14,14 +14,19 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter private Integer id;
-	
+	@Getter @Setter private String email;
 	@Getter @Setter private String senha;
 	@Getter @Setter private int ponto;
-	@Getter @Setter private String nome;
 	@Getter	@Setter	private String userName;
-	
 
 	
-	
-
+	/*
+	 *  - A pessoa cadastra com email e senha
+	- Faz login com email e senha
+ 	- Dai inicialmente a pessoa vai ter um apelido tipo "Estudante" + numero aleatorio
+ 
+ 	- Dai nas opções a pessoa troca para um apelido que não esteja sendo usado
+ 	
+ 	
+	 */
 }

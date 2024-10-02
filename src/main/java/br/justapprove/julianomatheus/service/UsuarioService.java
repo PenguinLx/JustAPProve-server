@@ -22,15 +22,13 @@ public class UsuarioService {
 	
 	public Usuario updateUsuario(@RequestBody Usuario usuarioDetails, Integer id) {
 		Usuario usr = usrrepository.findById(id).orElseThrow(); 
-		usr.setNome(usuarioDetails.getNome());
+		usr.setEmail(usuarioDetails.getEmail());
 		usr.setSenha(usuarioDetails.getSenha());
+		usr.setUserName(usuarioDetails.getUserName());
 		return usrrepository.save(usr);
 	}
 	
 	public void deleteUsuarioEntity(@RequestBody Usuario usuario) {
 		usrrepository.delete(usuario);
-	}
-	
-	
-	
+	}	
 }

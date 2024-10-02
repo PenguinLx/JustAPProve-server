@@ -11,28 +11,28 @@ import br.justapprove.julianomatheus.models.ProvaAnterior;
 import br.justapprove.julianomatheus.service.ProvaAnteriorService;
 
 @RestController
-@RequestMapping("/api/prova")
+@RequestMapping("/prova")
 public class ProvaAnteriorController {
 
 	@Autowired
 	private ProvaAnteriorService provaService;
 
-	@PostMapping("/prova/save")
+	@PostMapping("/save")
 	public ProvaAnterior saveProva(ProvaAnterior provaAnterior) {
 		return provaService.saveProva(provaAnterior);
 	}
 
-	@GetMapping("/prova/read")
+	@GetMapping("/read")
 	public ProvaAnterior readProva(ProvaAnterior provaAnterior) {
 		return provaService.readProva(provaAnterior);
 	}
 
-	@PostMapping("/prova/update")
+	@PostMapping("/update")
 	public ProvaAnterior updateProva(ProvaAnterior provaAnterior) {
 		return provaService.updateProva(provaAnterior, provaAnterior.getId());
 	}
 	
-	@DeleteMapping("/prova/delete")
+	@DeleteMapping("/delete")
 	public void deleteProva(ProvaAnterior provaAnterior) {
 		provaService.deleteProvaAnteriorEntity(provaAnterior);
 	}

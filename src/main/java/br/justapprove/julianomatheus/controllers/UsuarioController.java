@@ -13,28 +13,29 @@ import br.justapprove.julianomatheus.service.UsuarioService;
 import jakarta.websocket.OnError;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/usuarios")
 public class UsuarioController {
-	//colocar mapping para /error
+	//TODO:colocar mapping para /error
+	//TODO:fazer metodos para email, ponto e username(aqui e no Service);
 	@Autowired
 	private UsuarioService usrService;
 
-	@PostMapping("/usuarios/save")
+	@PostMapping("/save")
 	public Usuario save(@RequestBody Usuario usuario) {
 		return usrService.saveUsuario(usuario);
 	}
 	
-	@GetMapping("/usuarios/read")
+	@GetMapping("/read")
 	public Usuario read(@RequestBody Usuario usuario) {
 		return usrService.readUsuario(usuario);
 	}
 	
-	@PostMapping("/usuarios/update")
+	@PostMapping("/update")
 	public Usuario updateUsuario(@RequestBody Usuario usuario) {
 		return usrService.updateUsuario(usuario, usuario.getId());
 	}
 
-	@DeleteMapping("/usuarios/delete")
+	@DeleteMapping("/delete")
 	public void deleteUsuario(Usuario usuario) {
 		 usrService.deleteUsuarioEntity(usuario);
 	}

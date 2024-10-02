@@ -11,32 +11,30 @@ import br.justapprove.julianomatheus.models.Materia;
 import br.justapprove.julianomatheus.service.MateriaService;
 
 @RestController
-@RequestMapping("/api/materia")
+@RequestMapping("/materia")
 public class MateriaController {
 
 	
 	@Autowired
 	private MateriaService matService;
 	
-	@PostMapping("/materia/save")
+	@PostMapping("/save")
 	public Materia saveMateria(Materia materia) {
 		return matService.saveMateria(materia);
 	}
 	
-	@GetMapping("/materia/read")
+	@GetMapping("/read")
 	public Materia readMateria(Materia materia) {
 		return matService.readMateria(materia);
 	}
 	
-	@PostMapping("/materia/update")
+	@PostMapping("/update")
 	public Materia updateMateria(Materia materia) {
 		return matService.updateMateria(materia, materia.getId());
 	}
 	
-	@DeleteMapping("/materia/delete")
+	@DeleteMapping("/delete")
 	public void deleteMateria(Materia materia) {
 		matService.deleteMateriaEntity(materia);
-	}
-	
-	
+	}	
 }
