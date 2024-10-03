@@ -1,5 +1,8 @@
 package br.justapprove.julianomatheus.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,9 +21,13 @@ public class SimuladoService {
 		return simRepository.save(simulado);
 	}
 	
-	public Simulado readSimulado(@RequestBody Simulado simulado) {
+	public Optional<Simulado> readSimulado(@RequestBody Integer id ) {
 		
-		return simRepository.getReferenceById(simulado.getId());
+		return simRepository.findById(id);
+	}
+	
+	public List<Simulado> readAllSimulados(){
+		return simRepository.findAll();
 	}
 	
 	public Simulado updateSimulado(@RequestBody Simulado simulado, Integer id) {
@@ -30,9 +37,12 @@ public class SimuladoService {
 		return simRepository.save(sim);
 	}
 	
-	public void deleteSimuladoEntity(@RequestBody Simulado simulado) {
-		simRepository.delete(simulado);
+	public void deleteSimuladoById(@RequestBody Integer id) {
+		simRepository.deleteById(id);
 	}
 	
+	public void deleteAllSimulados() {
+		simRepository.deleteAll();
+	}
 	
 }

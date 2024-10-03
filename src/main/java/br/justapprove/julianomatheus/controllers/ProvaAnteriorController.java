@@ -1,9 +1,13 @@
 package br.justapprove.julianomatheus.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,18 +26,28 @@ public class ProvaAnteriorController {
 		return provaService.saveProva(provaAnterior);
 	}
 
-	@GetMapping("/read")
-	public ProvaAnterior readProva(ProvaAnterior provaAnterior) {
-		return provaService.readProva(provaAnterior);
+	@GetMapping("/read/{id}")
+	public ProvaAnterior readProva(Integer id) {
+		return provaService.readProva(id).orElseThrow();
+	}
+	
+	@GetMapping("/readAll")
+	public List<ProvaAnterior> readAllProvas(){
+		return provaService.readAllProvas();
 	}
 
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public ProvaAnterior updateProva(ProvaAnterior provaAnterior) {
 		return provaService.updateProva(provaAnterior, provaAnterior.getId());
 	}
 	
-	@DeleteMapping("/delete")
-	public void deleteProva(ProvaAnterior provaAnterior) {
-		provaService.deleteProvaAnteriorEntity(provaAnterior);
+	@DeleteMapping("/delete/{id}")
+	public void deleteProva(@PathVariable("id") Integer id) {
+		provaService.deleteProvaAnteriorById(id);
+	}
+	
+	@DeleteMapping("/deleteAll")
+	public void deleteAllProvaAnterior() {
+		provaService.deleteAllProvaAnterior();
 	}
 }

@@ -17,10 +17,10 @@ public class UsuarioTeste {
 	private void run() {
 		Usuario usr = new Usuario();
 		//create
-		usr.setEmail("cavalo#emailnumber1.com");
-		usr.setUserName("Cavalo_Doido");
-		usr.setSenha("hello_worlda");
-		usrRepo.save(usr);
+//		usr.setEmail("cavalo#emailnumber1.com");
+//		usr.setUserName("Cavalo_Doido");
+//		usr.setSenha("hello_worlda");
+//		usrRepo.save(usr);
 		//update
 		
 	

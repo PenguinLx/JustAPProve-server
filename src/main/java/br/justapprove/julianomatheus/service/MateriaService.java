@@ -1,5 +1,8 @@
 package br.justapprove.julianomatheus.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,9 +20,12 @@ public class MateriaService {
 		return matRepository.save(materia);
 	}
 	
-	public Materia readMateria(@RequestBody Materia materia) {
-		
-		return matRepository.getReferenceById(materia.getId());
+	public Optional<Materia> readMateria(@RequestBody Integer id) {
+		return matRepository.findById(id);
+	}
+	
+	public List<Materia> readAllMaterias(){
+		return matRepository.findAll();
 	}
 	
 	public Materia updateMateria(@RequestBody  Materia materia, Integer id) {
@@ -32,7 +38,11 @@ public class MateriaService {
 		return matRepository.save(mat);
 	}
 	
-	public void deleteMateriaEntity(@RequestBody Materia materia) {
-		matRepository.delete(materia);
+	public void deleteMateriaById(@RequestBody Integer id) {
+		matRepository.deleteById(id);
+	}
+	
+	public void deleteAllMateria() {
+		matRepository.deleteAll();
 	}
 }

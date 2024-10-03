@@ -1,5 +1,8 @@
 package br.justapprove.julianomatheus.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +20,12 @@ public class QuestaoService {
 		return questRepository.save(questao);
 	}
 	
-	public Questao readQuestao(@RequestBody Questao questao) {
-		return questRepository.getReferenceById(questao.getId());
+	public Optional<Questao> readQuestao(@RequestBody Integer id) {
+		return questRepository.findById(id);
+	}
+	
+	public List<Questao> readAllQuestoes(){
+		return questRepository.findAll();
 	}
 	
 	public Questao updateQuestao(@RequestBody Questao questao, Integer id) {
@@ -27,8 +34,11 @@ public class QuestaoService {
 		quest.setDescricao(questao.getDescricao());
 		return questRepository.save(quest);
 	}
-	//deletar por entidade
-	public void deleteQuestaoEntity(@RequestBody Questao questao) {
-		questRepository.delete(questao);
+		public void deleteQuestaoById(@RequestBody Integer id) {
+		questRepository.deleteById(id);
+	}
+		
+	public void deleteAllQuestoes() {
+		questRepository.deleteAll();
 	}
 }

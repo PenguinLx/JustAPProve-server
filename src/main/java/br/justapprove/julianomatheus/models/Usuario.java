@@ -18,6 +18,7 @@ public class Usuario {
 	@Getter @Setter private String senha;
 	@Getter @Setter private int ponto;
 	@Getter	@Setter	private String userName;
+	@Getter @Setter private byte[] image; 
 
 	
 	/*
@@ -25,7 +26,7 @@ public class Usuario {
 	- Faz login com email e senha
  	- Dai inicialmente a pessoa vai ter um apelido tipo "Estudante" + numero aleatorio
  
- 	- Dai nas opções a pessoa troca para um apelido que não esteja sendo usado
+ 	- Nas opções a pessoa troca para um apelido que não esteja sendo usado
  	
  	
 	 */

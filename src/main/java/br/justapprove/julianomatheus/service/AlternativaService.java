@@ -1,5 +1,8 @@
 package br.justapprove.julianomatheus.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,8 +21,12 @@ public class AlternativaService {
 		return altRepository.save(alternativa);
 	}
 	
-	public Alternativa readAlternativa(@RequestBody Alternativa alternativa) {
-		return altRepository.getReferenceById(alternativa.getId());
+	public Optional<Alternativa> readAlternativa(@RequestBody Integer id) {
+		return altRepository.findById(id);
+	}
+	
+	public List<Alternativa> readAllAlternativa(){
+		return altRepository.findAll();
 	}
 	
 	public Alternativa updateAlternativa(@RequestBody Alternativa alternativa, Integer id) {
@@ -29,7 +36,11 @@ public class AlternativaService {
 		return altRepository.save(alt);
 	}
 	
-	public void deleteAlternativaEntity(@RequestBody Alternativa alternativa) {
-		altRepository.delete(alternativa);
+	public void deleteAlternativaById(@RequestBody Integer id) {
+		altRepository.deleteById(id);
+	}
+	
+	public void deleteAllAlternativa() {
+		altRepository.deleteAll();
 	}
 }

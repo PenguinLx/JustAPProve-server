@@ -1,5 +1,8 @@
 package br.justapprove.julianomatheus.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +20,12 @@ public class ProvaAnteriorService {
 		return provaRepository.save(provaAnterior);
 	}
 
-	public ProvaAnterior readProva(@RequestBody ProvaAnterior provaAnterior) {
-		return provaRepository.getReferenceById(provaAnterior.getId());
+	public Optional<ProvaAnterior> readProva(@RequestBody Integer id) {
+		return provaRepository.findById(id);
+	}
+	
+	public List<ProvaAnterior> readAllProvas(){
+		return provaRepository.findAll();
 	}
 
 	public ProvaAnterior updateProva(@RequestBody ProvaAnterior provaAnterior, Integer id) {
@@ -28,9 +35,12 @@ public class ProvaAnteriorService {
 	prova.setPdf(provaAnterior.getPdf());
 	return provaRepository.save(prova);
 }
-	public void deleteProvaAnteriorEntity(@RequestBody ProvaAnterior provaAnterior) {
-		
-		provaRepository.delete(provaAnterior);
+	public void deleteProvaAnteriorById(@RequestBody Integer id) {
+		provaRepository.deleteById(id);
+	}
+	
+	public void deleteAllProvaAnterior() {
+		provaRepository.deleteAll();
 	}
 
 }
