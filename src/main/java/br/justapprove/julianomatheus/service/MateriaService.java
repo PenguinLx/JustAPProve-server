@@ -28,7 +28,7 @@ public class MateriaService {
 		return matRepository.findAll();
 	}
 	
-	public Materia updateMateria(@RequestBody  Materia materia, Integer id) {
+	public Materia updateMateria(@RequestBody Integer id, Materia materia) {
 		
 		Materia mat = matRepository.findById(id).orElseThrow();
 		mat.setNome(materia.getNome());

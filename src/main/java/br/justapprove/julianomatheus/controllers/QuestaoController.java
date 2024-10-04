@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,7 @@ import br.justapprove.julianomatheus.models.Questao;
 import br.justapprove.julianomatheus.service.QuestaoService;
 
 @RestController
-@RequestMapping("/questoes")
+@RequestMapping("/questao")
 public class QuestaoController {
 
 	@Autowired
@@ -37,9 +38,9 @@ public class QuestaoController {
 		return questService.readAllQuestoes();
 	}
 	
-	@PutMapping("/update")
-	public Questao updateQuestao(Questao questao) {
-		return questService.updateQuestao(questao, questao.getId());
+	@PutMapping("/update{id}")
+	public Questao updateQuestao(@PathVariable Integer id, @RequestBody Questao questao) {
+		return questService.updateQuestao(id, questao);
 	}
 	
 	@DeleteMapping("/delete{id}")

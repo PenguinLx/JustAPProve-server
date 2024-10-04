@@ -30,7 +30,7 @@ public class SimuladoService {
 		return simRepository.findAll();
 	}
 	
-	public Simulado updateSimulado(@RequestBody Simulado simulado, Integer id) {
+	public Simulado updateSimulado(@RequestBody Integer id, Simulado simulado) {
 		Simulado sim = simRepository.findById(id).orElseThrow(); 
 		sim.setQuestoes(simulado.getQuestoes());
 		sim.setPontos(simulado.getPontos());

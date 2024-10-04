@@ -29,7 +29,7 @@ public class AlternativaService {
 		return altRepository.findAll();
 	}
 	
-	public Alternativa updateAlternativa(@RequestBody Alternativa alternativa, Integer id) {
+	public Alternativa updateAlternativa(@RequestBody Integer id, Alternativa alternativa) {
 		Alternativa alt = altRepository.findById(id).orElseThrow();
 		alt.setDescricao(alternativa.getDescricao());
 		alt.setCorreta(alternativa.isCorreta());

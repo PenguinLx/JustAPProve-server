@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,9 +37,9 @@ public class MaterialController {
 		return matlService.readAllMateriais();
 	}
 	
-	@PutMapping("/update")
-	public Material updateMaterial(Material material) {
-		return matlService.updateMaterial(material, material.getId());
+	@PutMapping("/update/{id}")
+	public Material updateMaterial(@PathVariable Integer id, @RequestBody Material material) {
+		return matlService.updateMaterial(id, material);
 	}
 	
 	@DeleteMapping("/delete/{id}")

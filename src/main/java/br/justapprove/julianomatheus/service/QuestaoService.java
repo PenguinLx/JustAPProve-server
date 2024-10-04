@@ -28,7 +28,7 @@ public class QuestaoService {
 		return questRepository.findAll();
 	}
 	
-	public Questao updateQuestao(@RequestBody Questao questao, Integer id) {
+	public Questao updateQuestao(@RequestBody Integer id, Questao questao) {
 		Questao quest = questRepository.findById(id).orElseThrow();
 		quest.setAlternativas(questao.getAlternativas());
 		quest.setDescricao(questao.getDescricao());
