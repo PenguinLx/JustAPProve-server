@@ -3,6 +3,7 @@ package br.justapprove.julianomatheus.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.justapprove.julianomatheus.models.LoginRequest;
+import br.justapprove.julianomatheus.models.LoginResponse;
 import br.justapprove.julianomatheus.models.Usuario;
 import br.justapprove.julianomatheus.service.UsuarioService;
 import jakarta.websocket.OnError;
@@ -57,6 +60,19 @@ public class UsuarioController {
 	public void deleteAll() {
 		usrService.deleteAllUsuarios();
 	}
+	@PostMapping("/login")
+    public ResponseEntity<LoginResponse> userLogin(@RequestBody LoginRequest loginRequest) {
+        LoginResponse response = new LoginResponse();
+
+        if (usrService.readUsuarioByEmail(loginRequest.getEmail()).getEmail().equals(loginRequest.getEmail()) && 
+        		usrService.readUsuarioByEmail(loginRequest.getEmail()).getSenha().equals(loginRequest.getSenha())) {
+            response.setResposta(true);
+        } else {
+        	response.setResposta(false);
+        }
+
+        return ResponseEntity.ok(response);
+    }
 	@OnError()
 	public void onError() {
 	}

@@ -29,6 +29,10 @@ public class UsuarioService {
 		 return usrrepository.findById(id);
 		 
 	}
+	public Usuario readUsuarioByEmail(String email) {
+		 return usrrepository.findByEmail(email);
+		 
+	}
 	public List<Usuario> readAllUsuarios() {
 		return usrrepository.findAll();
 	}
