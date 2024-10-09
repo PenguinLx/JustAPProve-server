@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -36,13 +35,6 @@ public class UsuarioService {
 	public List<Usuario> readAllUsuarios() {
 		return usrrepository.findAll();
 	}
-	public List<Usuario> readAllUsuariosByPontos() {
-		return usrrepository.findAll(Sort.by(Sort.Direction.DESC, "ponto"));
-	}
-	
-//	private Sort sortByIdAsc() {
-//        return new Sort(Sort.Direction.ASC, "id");
-//    }
 	
 	public Usuario updateUsuario(@RequestBody Integer id, Usuario usuarioDetails) {
 		Usuario usr = usrrepository.findById(id).orElseThrow(); 

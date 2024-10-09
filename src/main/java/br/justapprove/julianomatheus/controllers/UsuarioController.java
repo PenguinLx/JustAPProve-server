@@ -29,7 +29,7 @@ public class UsuarioController {
 	private UsuarioService usrService;
 	@PostMapping("/saveUser")
 	public Usuario save(@RequestBody Usuario usuario) {
-		 return usrService.saveUsuario(usuario);
+		return usrService.saveUsuario(usuario);
 	}
 	@GetMapping("/readUserById/{id}")
 	@ResponseBody
@@ -39,11 +39,6 @@ public class UsuarioController {
 	@GetMapping("/readAll")
 	public List<Usuario> readAllUsuarios() {
 		return usrService.readAllUsuarios();
-	}
-	
-	@GetMapping("/readAllUsuariosByPontos")
-	public List<Usuario> readAllUsuariosByPontos() {
-		return usrService.readAllUsuariosByPontos();
 	}
 	
 	@PutMapping("/update/{id}")
@@ -75,5 +70,6 @@ public class UsuarioController {
     }
 	@OnError()
 	public void onError() {
+	
 	}
 }
