@@ -36,9 +36,9 @@ public class AlternativaController {
 		return altService.readAllAlternativa();
 	}
 
-	@PutMapping("/update/{id}")
-	public Alternativa updateAlternativa(Integer id, Alternativa alternativa) {
-		return altService.updateAlternativa(id, alternativa);
+	@PutMapping("/update")
+	public Alternativa updateAlternativa(Alternativa alternativa) {
+		return altService.updateAlternativa(alternativa, alternativa.getId());
 	}
 
 	@DeleteMapping("/delete/{id}")

@@ -28,7 +28,7 @@ public class ProvaAnteriorService {
 		return provaRepository.findAll();
 	}
 
-	public ProvaAnterior updateProva(@RequestBody Integer id, ProvaAnterior provaAnterior) {
+	public ProvaAnterior updateProva(@RequestBody ProvaAnterior provaAnterior, Integer id) {
 		
 	ProvaAnterior prova = provaRepository.findById(id).orElseThrow();
 	prova.setTitulo(provaAnterior.getTitulo());

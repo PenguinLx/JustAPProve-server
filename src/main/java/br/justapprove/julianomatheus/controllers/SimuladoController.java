@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +15,7 @@ import br.justapprove.julianomatheus.models.Simulado;
 import br.justapprove.julianomatheus.service.SimuladoService;
 
 @RestController
-@RequestMapping("/simulado")
+@RequestMapping("/simulados")
 public class SimuladoController {
 
 	@Autowired
@@ -34,9 +33,9 @@ public class SimuladoController {
 	public List<Simulado> readSimuladoAll() {
 		return simService.readAllSimulados();
 	}
-	@PutMapping("/update/{id}")
-	public Simulado updateSimulado(@PathVariable("id") Integer id, @RequestBody Simulado simulado) {
-		return simService.updateSimulado(id, simulado);
+	@PutMapping("/update")
+	public Simulado updateSimulado(Simulado simulado) {
+		return simService.updateSimulado(simulado, simulado.getId());
 	}
 	@DeleteMapping("/delete/{id}")
 	public void deleteSimulado(@PathVariable("id") Integer id) {

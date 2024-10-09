@@ -37,9 +37,9 @@ public class MateriaController {
 		return matService.readAllMaterias();
 	}
 	
-	@PutMapping("/update/{id}")
-	public Materia updateMateria(Integer id, Materia materia) {
-		return matService.updateMateria(id, materia);
+	@PutMapping("/update")
+	public Materia updateMateria(Materia materia) {
+		return matService.updateMateria(materia, materia.getId());
 	}
 	
 	@DeleteMapping("/delete/{id}")

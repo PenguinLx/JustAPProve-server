@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,9 +36,9 @@ public class ProvaAnteriorController {
 		return provaService.readAllProvas();
 	}
 
-	@PutMapping("/update/{id}")
-	public ProvaAnterior updateProva(@PathVariable("id") Integer id, @RequestBody ProvaAnterior provaAnterior) {
-		return provaService.updateProva(id, provaAnterior);
+	@PutMapping("/update")
+	public ProvaAnterior updateProva(ProvaAnterior provaAnterior) {
+		return provaService.updateProva(provaAnterior, provaAnterior.getId());
 	}
 	
 	@DeleteMapping("/delete/{id}")

@@ -28,7 +28,7 @@ public class MaterialService {
 		return matlRepository.findAll();	
 	}
 	
-	public Material updateMaterial(@RequestBody Integer id, Material material) {
+	public Material updateMaterial(@RequestBody Material material, Integer id) {
 		Material matl = matlRepository.findById(id).orElseThrow();
 		matl.setArtigo(material.getArtigo());
 		matl.setVideo(material.getVideo());
