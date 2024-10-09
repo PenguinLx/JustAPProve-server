@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import br.justapprove.julianomatheus.models.Usuario;
 import br.justapprove.julianomatheus.repositories.UsuarioRepository;
-
+import org.springframework.data.domain.Sort;
 @Service
 public class UsuarioService {
 	
@@ -34,6 +34,10 @@ public class UsuarioService {
 	}
 	public List<Usuario> readAllUsuarios() {
 		return usrrepository.findAll();
+	}
+	
+	public List<Usuario> readAllUsuariosByPontos() {
+		return usrrepository.findAll(Sort.by(Sort.Direction.DESC, "ponto"));
 	}
 	
 	public Usuario updateUsuario(@RequestBody Integer id, Usuario usuarioDetails) {

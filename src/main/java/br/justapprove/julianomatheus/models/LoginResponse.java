@@ -1,14 +1,12 @@
 package br.justapprove.julianomatheus.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class LoginResponse {
-	private boolean resposta;
+	@Getter @Setter private boolean resposta;
 
-	public boolean getResposta() {
-		return resposta;
-	}
-
-	public void setResposta(boolean resposta) {
-		this.resposta = resposta;
-	}
+	
+	
 	
 }
