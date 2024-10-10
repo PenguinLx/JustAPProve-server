@@ -46,11 +46,18 @@ public class UsuarioController {
 		return usrService.readAllUsuariosByPontos();
 	}
 	
-	@PutMapping("/update/{id}")
+	@PutMapping("/updateUsuario/{id}")
 	public Usuario updateUsuario(@PathVariable("id") Integer id, @RequestBody Usuario usuario) {
 		return usrService.updateUsuario(id, usuario);
 	}
-
+	@PutMapping("/updatePerfil/{id}")
+	public Usuario updatePerfil(@PathVariable("id") Integer id, @RequestBody Usuario usuario) {
+		return usrService.updatePerfil(id, usuario);
+	}
+	@PutMapping("/updatePonto/{id}")
+	public Usuario updatePontos(@PathVariable("id") Integer id, @RequestBody Usuario usuario) {
+		return usrService.updatePontos(id, usuario);
+	}
 	@DeleteMapping("/delete/{id}")
 	public void deleteUsuario(@PathVariable("id") Integer id) {
 		 usrService.deleteUsuarioById(id);
@@ -64,9 +71,10 @@ public class UsuarioController {
     public ResponseEntity<LoginResponse> userLogin(@RequestBody LoginRequest loginRequest) {
         LoginResponse response = new LoginResponse();
 
-        if (usrService.readUsuarioByEmail(loginRequest.getEmailL()).getEmail().equals(loginRequest.getEmailL()) && 
-        		usrService.readUsuarioByEmail(loginRequest.getEmailL()).getSenha().equals(loginRequest.getSenhaL())) {
+        if (usrService.readUsuarioByEmail(loginRequest.getEmail()).getEmail().equals(loginRequest.getEmail()) && 
+        		usrService.readUsuarioByEmail(loginRequest.getEmail()).getSenha().equals(loginRequest.getSenha())) {
             response.setResposta(true);
+            response.setId(usrService.readUsuarioByEmail(loginRequest.getEmail()).getId());
         } else {
         	response.setResposta(false);
         }

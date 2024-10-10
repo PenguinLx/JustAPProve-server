@@ -40,15 +40,38 @@ public class UsuarioService {
 		return usrrepository.findAll(Sort.by(Sort.Direction.DESC, "ponto"));
 	}
 	
-	public Usuario updateUsuario(@RequestBody Integer id, Usuario usuarioDetails) {
-		Usuario usr = usrrepository.findById(id).orElseThrow(); 
-		usr.setEmail(usuarioDetails.getEmail());
-		usr.setSenha(usuarioDetails.getSenha());
-		usr.setUserName(usuarioDetails.getUserName());
-		usr.setImage(usuarioDetails.getImage());
+	public Usuario updateUsuario(@RequestBody Integer id, Usuario usuario) {
+		Usuario usr = usrrepository.findById(id).orElseThrow();
+		if(usuario.getEmail() != null && !usuario.getEmail().isBlank()) {
+			usr.setEmail(usuario.getEmail());
+		}
+		
+		if(usuario.getSenha() != null && !usuario.getSenha().isBlank()) {
+			usr.setSenha(usuario.getSenha());	
+		}
+		if(usuario.getUserName() != null && !usuario.getUserName().isBlank()) {
+			usr.setUserName(usuario.getUserName());	
+		}
+		
+//		usr.setImage(usuario.getImage());
 		return usrrepository.save(usr);
 	}
 	
+	public Usuario updatePontos(@RequestBody Integer id, Usuario usuario) {
+		Usuario usr = usrrepository.findById(id).orElseThrow();
+		usr.setPonto(usuario.getPonto());
+		return usrrepository.save(usr);
+	}
+	public Usuario updatePerfil(@RequestBody Integer id, Usuario usuario) {
+		Usuario usr = usrrepository.findById(id).orElseThrow();
+		if(!usuario.getUserName().isBlank()) {
+			usr.setUserName(usuario.getUserName());	
+		}
+		if(!usuario.getSenha().isBlank()) {
+			usr.setSenha(usuario.getSenha());	
+		}
+		return usrrepository.save(usr);
+	}
 	public void deleteUsuarioById(@RequestBody Integer id) {
 		usrrepository.deleteById(id);
 	}	
