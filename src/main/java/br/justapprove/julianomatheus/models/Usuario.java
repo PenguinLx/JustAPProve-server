@@ -17,7 +17,7 @@ public class Usuario {
 	@Getter @Setter private String email;
 	@Getter @Setter private String senha;
 	@Getter @Setter private int ponto;
-	@Getter	@Setter	private String userName;
+	@Getter	@Setter	private String apelido;
 	@Getter @Setter private byte[] image; 
 
 	

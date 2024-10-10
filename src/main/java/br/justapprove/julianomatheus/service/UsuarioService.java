@@ -49,8 +49,8 @@ public class UsuarioService {
 		if(usuario.getSenha() != null && !usuario.getSenha().isBlank()) {
 			usr.setSenha(usuario.getSenha());	
 		}
-		if(usuario.getUserName() != null && !usuario.getUserName().isBlank()) {
-			usr.setUserName(usuario.getUserName());	
+		if(usuario.getApelido() != null && !usuario.getApelido().isBlank()) {
+			usr.setApelido(usuario.getApelido());	
 		}
 		
 //		usr.setImage(usuario.getImage());
@@ -64,8 +64,8 @@ public class UsuarioService {
 	}
 	public Usuario updatePerfil(@RequestBody Integer id, Usuario usuario) {
 		Usuario usr = usrrepository.findById(id).orElseThrow();
-		if(!usuario.getUserName().isBlank()) {
-			usr.setUserName(usuario.getUserName());	
+		if(!usuario.getApelido().isBlank()) {
+			usr.setApelido(usuario.getApelido());	
 		}
 		if(!usuario.getSenha().isBlank()) {
 			usr.setSenha(usuario.getSenha());	
