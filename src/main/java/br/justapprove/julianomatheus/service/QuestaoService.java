@@ -1,11 +1,13 @@
 package br.justapprove.julianomatheus.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.justapprove.julianomatheus.models.Questao;
 import br.justapprove.julianomatheus.repositories.QuestaoRepository;
@@ -14,30 +16,48 @@ import br.justapprove.julianomatheus.repositories.QuestaoRepository;
 public class QuestaoService {
 	@Autowired
 	private QuestaoRepository questRepository;
-	
+
 	public Questao saveQuestao(@RequestBody Questao questao) {
-	
+
 		return questRepository.save(questao);
 	}
-	
+
 	public Optional<Questao> readQuestao(@RequestBody Integer id) {
 		return questRepository.findById(id);
 	}
-	
-	public List<Questao> readAllQuestoes(){
+
+	public List<Questao> readAllQuestoes() {
 		return questRepository.findAll();
 	}
-	
+
 	public Questao updateQuestao(@RequestBody Questao questao, Integer id) {
 		Questao quest = questRepository.findById(id).orElseThrow();
 		quest.setAlternativas(questao.getAlternativas());
 		quest.setDescricao(questao.getDescricao());
 		return questRepository.save(quest);
 	}
-		public void deleteQuestaoById(@RequestBody Integer id) {
+
+	public void deleteQuestaoById(@RequestBody Integer id) {
 		questRepository.deleteById(id);
 	}
+
+	public void insertImage(Integer idQuestao, MultipartFile image) {
+		// final String PATH = "./src/main/resources/static/upload_questao/";
 		
+		Questao questao = questRepository.findById(idQuestao).orElseThrow();
+		byte[] imagem;
+		try {
+			imagem = image.getBytes();
+
+			questao.setDescricao(imagem);
+
+			questRepository.save(questao);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public void deleteAllQuestoes() {
 		questRepository.deleteAll();
 	}

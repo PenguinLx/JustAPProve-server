@@ -19,8 +19,7 @@ public class Simulado {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter private Integer id;
-	@OneToMany
-	@JoinColumn(name = "id")
+	@OneToMany(mappedBy = "simulado")
 	@Getter @Setter private List<Questao> questoes;
 
 	@Getter @Setter private int pontos;

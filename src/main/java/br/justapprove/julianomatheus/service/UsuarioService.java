@@ -53,7 +53,7 @@ public class UsuarioService {
 			usr.setApelido(usuario.getApelido());	
 		}
 		
-//		usr.setImage(usuario.getImage());
+		usr.setImage(usuario.getImage());
 		return usrrepository.save(usr);
 	}
 	
@@ -62,16 +62,7 @@ public class UsuarioService {
 		usr.setPonto(usuario.getPonto());
 		return usrrepository.save(usr);
 	}
-	public Usuario updatePerfil(@RequestBody Integer id, Usuario usuario) {
-		Usuario usr = usrrepository.findById(id).orElseThrow();
-		if(!usuario.getApelido().isBlank()) {
-			usr.setApelido(usuario.getApelido());	
-		}
-		if(!usuario.getSenha().isBlank()) {
-			usr.setSenha(usuario.getSenha());	
-		}
-		return usrrepository.save(usr);
-	}
+	
 	public void deleteUsuarioById(@RequestBody Integer id) {
 		usrrepository.deleteById(id);
 	}	

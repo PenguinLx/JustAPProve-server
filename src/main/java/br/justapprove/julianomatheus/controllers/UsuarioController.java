@@ -50,10 +50,7 @@ public class UsuarioController {
 	public Usuario updateUsuario(@PathVariable("id") Integer id, @RequestBody Usuario usuario) {
 		return usrService.updateUsuario(id, usuario);
 	}
-	@PutMapping("/updatePerfil/{id}")
-	public Usuario updatePerfil(@PathVariable("id") Integer id, @RequestBody Usuario usuario) {
-		return usrService.updatePerfil(id, usuario);
-	}
+	
 	@PutMapping("/updatePonto/{id}")
 	public Usuario updatePontos(@PathVariable("id") Integer id, @RequestBody Usuario usuario) {
 		return usrService.updatePontos(id, usuario);

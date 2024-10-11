@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.justapprove.julianomatheus.models.Questao;
 import br.justapprove.julianomatheus.service.QuestaoService;
@@ -42,7 +43,7 @@ public class QuestaoController {
 		return questService.updateQuestao(questao, questao.getId());
 	}
 	
-	@DeleteMapping("/delete{id}")
+	@DeleteMapping("/delete/{id}")
 	public void deleteQuestao(@PathVariable("id") Integer id) {
 		questService.deleteQuestaoById(id);
 	}
@@ -50,6 +51,11 @@ public class QuestaoController {
 	@DeleteMapping("/deleteAll")
 	public void deleteAllQuestao() {
 		questService.deleteAllQuestoes();
+	}
+	
+	@PostMapping("/saveImage/{id}")
+	public void saveImage(@PathVariable("id") Integer idQuestao, MultipartFile image) {
+		questService.insertImage (idQuestao, image);
 	}
 	
 }
