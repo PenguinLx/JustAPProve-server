@@ -1,7 +1,5 @@
 package br.justapprove.julianomatheus.models;
 
-import java.io.File;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +13,7 @@ public class ProvaAnterior {
 	@Getter private Integer id;
 	
 	@Getter @Setter private String titulo;
-	@Getter @Setter private File pdf;
+	@Getter @Setter private byte[] pdf;
 	
 	
 	

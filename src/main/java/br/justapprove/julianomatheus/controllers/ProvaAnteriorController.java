@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.justapprove.julianomatheus.models.ProvaAnterior;
 import br.justapprove.julianomatheus.service.ProvaAnteriorService;
@@ -24,6 +26,11 @@ public class ProvaAnteriorController {
 	@PostMapping("/save")
 	public ProvaAnterior saveProva(ProvaAnterior provaAnterior) {
 		return provaService.saveProva(provaAnterior);
+	}
+	@PutMapping("/savePdf/{id}")
+	//@PutMapping(value = "/savePdf/{id}", headers = "Content-Type= multipart/form-data")
+	public void savePdf(@PathVariable("id") Integer id, @RequestBody MultipartFile pdf) {
+		 provaService.insertPdf(id, pdf);
 	}
 
 	@GetMapping("/read/{id}")

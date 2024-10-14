@@ -25,4 +25,5 @@ public class Alternativa {
 	@JoinColumn(name = "id_questao")
 	private Questao questao;
 	
+
 }
