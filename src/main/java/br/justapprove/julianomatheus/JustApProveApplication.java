@@ -12,4 +12,5 @@ public class JustApProveApplication {
 	
 	//usar service? : https://medium.com/@chandantechie/spring-boot-application-with-crud-operations-using-spring-data-jpa-and-mysql-23c8019660b1
 	
+	//possivel soluçao para os problemas de arquivo: https://www.youtube.com/watch?v=XUL60-Ke-L8
 }

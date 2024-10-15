@@ -1,8 +1,10 @@
 package br.justapprove.julianomatheus.models;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,9 +20,10 @@ public class Simulado {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter private Integer id;
-	@ManyToMany(mappedBy = "simulado")
-	@Getter @Setter private List<Questao> questoes;
+	@ManyToMany(mappedBy = "simulados", fetch = FetchType.EAGER)
+	@Getter @Setter private Set<Questao> questoes = new HashSet<>();
 
+	
 	@Getter @Setter private int pontos;
 
 
