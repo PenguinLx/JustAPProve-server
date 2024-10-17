@@ -1,5 +1,6 @@
 package br.justapprove.julianomatheus.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.justapprove.julianomatheus.models.Alternativa;
 import br.justapprove.julianomatheus.models.Questao;
 import br.justapprove.julianomatheus.service.QuestaoService;
 
@@ -24,8 +27,8 @@ public class QuestaoController {
 
 	
 	@PostMapping("/save")
-	public Questao saveQuestao(Questao questao) {
-		return questService.saveQuestao(questao);
+	public Questao saveQuestao(@RequestParam("descricao") MultipartFile descricao, @RequestParam("alternativas") List<Alternativa> alternativas) throws IOException {
+		return questService.saveQuestao(descricao, alternativas);
 	}
 	
 	@GetMapping("/read/{id}")
@@ -53,8 +56,8 @@ public class QuestaoController {
 		questService.deleteAllQuestoes();
 	}
 	
-	@PostMapping("/saveImage/{id}")
-	public void saveImage(@PathVariable("id") Integer idQuestao, MultipartFile image) {
+	@PutMapping("/saveImage/{id}")
+	public void saveImage(@PathVariable("id") Integer idQuestao,@RequestParam("image") MultipartFile image) throws IOException {
 		questService.insertImage (idQuestao, image);
 	}
 	

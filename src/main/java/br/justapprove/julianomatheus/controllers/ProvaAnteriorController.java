@@ -1,5 +1,6 @@
 package br.justapprove.julianomatheus.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,12 +26,13 @@ public class ProvaAnteriorController {
 	private ProvaAnteriorService provaService;
 
 	@PostMapping("/save")
-	public ProvaAnterior saveProva(ProvaAnterior provaAnterior) {
-		return provaService.saveProva(provaAnterior);
+	public ProvaAnterior saveProva(@RequestParam("pdf") MultipartFile pdf,@RequestParam("titulo") String titulo) throws IOException {
+		
+		return provaService.saveProva(pdf, titulo);
 	}
 	@PutMapping("/savePdf/{id}")
 	//@PutMapping(value = "/savePdf/{id}", headers = "Content-Type= multipart/form-data")
-	public void savePdf(@PathVariable("id") Integer id, @RequestBody MultipartFile pdf) {
+	public void savePdf(@PathVariable("id") Integer id, @RequestParam MultipartFile pdf) {
 		 provaService.insertPdf(id, pdf);
 	}
 

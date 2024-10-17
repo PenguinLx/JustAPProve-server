@@ -1,10 +1,12 @@
 package br.justapprove.julianomatheus.models;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +20,8 @@ public class Usuario {
 	@Getter @Setter private String senha;
 	@Getter @Setter private int ponto;
 	@Getter	@Setter	private String apelido;
+	@Lob
+	@Column(columnDefinition = "longblob")
 	@Getter @Setter private byte[] image; 
 
 	
