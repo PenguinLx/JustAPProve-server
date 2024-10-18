@@ -42,7 +42,5 @@ public class MateriaService {
 		matRepository.deleteById(id);
 	}
 	
-	public void deleteAllMateria() {
-		matRepository.deleteAll();
-	}
+	
 }

@@ -41,8 +41,6 @@ public class SimuladoService {
 		simRepository.deleteById(id);
 	}
 	
-	public void deleteAllSimulados() {
-		simRepository.deleteAll();
-	}
+	
 	
 }

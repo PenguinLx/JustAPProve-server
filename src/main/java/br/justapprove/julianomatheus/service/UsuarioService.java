@@ -66,7 +66,5 @@ public class UsuarioService {
 	public void deleteUsuarioById(@RequestBody Integer id) {
 		usrrepository.deleteById(id);
 	}	
-	public void deleteAllUsuarios() {
-		usrrepository.deleteAll();
-	}
+	
 }

@@ -5,6 +5,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import br.justapprove.julianomatheus.util.JsonCollectionDeserializer;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,6 +39,9 @@ public class Questao {
 	@Lob @Getter @Setter private byte[] descricao;
 	
 	@OneToMany(mappedBy = "questao")
+	@JsonProperty("list")
+	//using = JsonCollectionDeserializer.class
+	@JsonDeserialize(as=List.class, contentAs=Alternativa.class)
 	@Getter @Setter private List<Alternativa> alternativas;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)

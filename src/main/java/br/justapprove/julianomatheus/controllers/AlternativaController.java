@@ -47,8 +47,4 @@ public class AlternativaController {
 		altService.deleteAlternativaById(id);
 	}
 	
-	@DeleteMapping("/deleteAll")
-	public void deleteAllAlternativa() {
-		altService.deleteAllAlternativa();
-	}
 }

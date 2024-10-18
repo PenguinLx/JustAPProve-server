@@ -39,7 +39,5 @@ public class MaterialService {
 		matlRepository.deleteById(id);
 	}
 	
-	public void deleteAllMaterial() {
-		matlRepository.deleteAll();
-	}
+	
 }

@@ -23,8 +23,7 @@ import jakarta.websocket.OnError;
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
-	//TODO:colocar mapping para /error
-	//TODO:fazer metodos para email, ponto e username(aqui e no Service);
+	
 	@Autowired
 	private UsuarioService usrService;
 	@PostMapping("/saveUser")
@@ -59,11 +58,7 @@ public class UsuarioController {
 	public void deleteUsuario(@PathVariable("id") Integer id) {
 		 usrService.deleteUsuarioById(id);
 	}
-	//DANGER:DELETA TUDO, USAR COM PRECAUÇÃO!//
-	@DeleteMapping("/deleteAll")
-	public void deleteAll() {
-		usrService.deleteAllUsuarios();
-	}
+
 	@PostMapping("/login")
     public ResponseEntity<LoginResponse> userLogin(@RequestBody LoginRequest loginRequest) {
         LoginResponse response = new LoginResponse();

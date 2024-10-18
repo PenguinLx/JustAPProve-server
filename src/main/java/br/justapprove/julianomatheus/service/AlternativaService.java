@@ -40,7 +40,5 @@ public class AlternativaService {
 		altRepository.deleteById(id);
 	}
 	
-	public void deleteAllAlternativa() {
-		altRepository.deleteAll();
-	}
+	
 }

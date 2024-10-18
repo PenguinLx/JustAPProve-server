@@ -47,8 +47,4 @@ public class MateriaController {
 		matService.deleteMateriaById(id);
 	}	
 	
-	@DeleteMapping("deleteAll")
-	public void deleteAllMateria() {
-		matService.deleteAllMateria();
-	}
 }

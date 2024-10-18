@@ -1,6 +1,7 @@
 package br.justapprove.julianomatheus.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,9 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import br.justapprove.julianomatheus.models.Alternativa;
 import br.justapprove.julianomatheus.models.Questao;
-import br.justapprove.julianomatheus.repositories.AlternativaRepository;
 import br.justapprove.julianomatheus.repositories.QuestaoRepository;
 
 @Service
@@ -19,10 +22,17 @@ public class QuestaoService {
 	@Autowired
 	private QuestaoRepository questRepository; 
 
-	public Questao saveQuestao(MultipartFile descricao, List<Alternativa> alternativas) throws IOException {
+	public Questao saveQuestao(List<Alternativa> alternativas) throws JsonProcessingException {
 		Questao questao = new Questao();
-		questao.setDescricao(descricao.getBytes());
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonArray = mapper.writeValueAsString(alternativas);  
+        
+        // deserialize JSON array into Java Array  
+        @SuppressWarnings("unchecked")  
+        List<Alternativa> data = mapper.readValue(jsonArray, List.class);  
+		//questao.setDescricao(descricao.getBytes());
 		questao.setAlternativas(alternativas);
+		//questao.setAlternativas(data);
 		return questRepository.save(questao);
 	}
 

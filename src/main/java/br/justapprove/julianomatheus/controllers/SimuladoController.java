@@ -42,10 +42,6 @@ public class SimuladoController {
 		simService.deleteSimuladoById(id);
 	}
 	
-	@DeleteMapping("/deleteAll")
-	public void deleteAllSimulado() {
-		simService.deleteAllSimulados();
-	}
 	
 	@GetMapping("/teste")
 	public String teste() {

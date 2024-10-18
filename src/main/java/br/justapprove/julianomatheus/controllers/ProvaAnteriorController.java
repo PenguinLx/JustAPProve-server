@@ -56,8 +56,5 @@ public class ProvaAnteriorController {
 		provaService.deleteProvaAnteriorById(id);
 	}
 	
-	@DeleteMapping("/deleteAll")
-	public void deleteAllProvaAnterior() {
-		provaService.deleteAllProvaAnterior();
-	}
+
 }

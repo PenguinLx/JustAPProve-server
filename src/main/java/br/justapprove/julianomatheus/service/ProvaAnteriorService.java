@@ -57,8 +57,6 @@ public class ProvaAnteriorService {
 		provaRepository.deleteById(id);
 	}
 	
-	public void deleteAllProvaAnterior() {
-		provaRepository.deleteAll();
-	}
+	
 
 }
