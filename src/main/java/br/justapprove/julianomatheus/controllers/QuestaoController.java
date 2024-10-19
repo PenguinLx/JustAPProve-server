@@ -1,10 +1,10 @@
 package br.justapprove.julianomatheus.controllers;
 
 import java.io.IOException;
-import java.lang.System.Logger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.justapprove.julianomatheus.models.Alternativa;
 import br.justapprove.julianomatheus.models.Questao;
 import br.justapprove.julianomatheus.service.QuestaoService;
 
@@ -32,8 +30,9 @@ public class QuestaoController {
 
 	
 	@PostMapping("/save")
-	public Questao saveQuestao(@RequestBody List<Alternativa> alternativas) throws JsonProcessingException{
-		return questService.saveQuestao(alternativas);
+	//@PostMapping(value = "/save", consumes = MediaType.ALL_VALUE, produces = MediaType.ALL_VALUE)
+	public Questao saveQuestao(@RequestBody Questao questao) throws JsonProcessingException{
+		return questService.saveQuestao(questao);
 	}
 	
 	@GetMapping("/read/{id}")

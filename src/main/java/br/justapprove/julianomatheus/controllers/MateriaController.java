@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.justapprove.julianomatheus.models.Materia;
 import br.justapprove.julianomatheus.service.MateriaService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @RestController
 @RequestMapping("/materia")

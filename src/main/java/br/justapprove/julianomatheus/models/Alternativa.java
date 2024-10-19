@@ -1,5 +1,7 @@
 package br.justapprove.julianomatheus.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,9 +22,9 @@ public class Alternativa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter private Integer id;
-	
+	//@JsonProperty("correta")
 	@Getter @Setter private boolean correta;
-	
+	//@JsonProperty("descricao")
 	@Getter @Setter private String descricao;
 	
 	@ManyToOne

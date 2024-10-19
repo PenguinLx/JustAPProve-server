@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.justapprove.julianomatheus.models.Alternativa;
 import br.justapprove.julianomatheus.service.AlternativaService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @RestController
 @RequestMapping("/alternativa")

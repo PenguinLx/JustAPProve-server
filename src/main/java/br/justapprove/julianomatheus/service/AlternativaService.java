@@ -17,7 +17,7 @@ public class AlternativaService {
 	private AlternativaRepository altRepository;
 	
 	
-	public Alternativa saveAlternativa( Alternativa alternativa) {
+	public Alternativa saveAlternativa(Alternativa alternativa) {
 		return altRepository.save(alternativa);
 	}
 	

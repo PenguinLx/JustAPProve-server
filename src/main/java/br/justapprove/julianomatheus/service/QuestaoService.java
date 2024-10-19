@@ -22,16 +22,16 @@ public class QuestaoService {
 	@Autowired
 	private QuestaoRepository questRepository; 
 
-	public Questao saveQuestao(List<Alternativa> alternativas) throws JsonProcessingException {
-		Questao questao = new Questao();
-		ObjectMapper mapper = new ObjectMapper();
-		String jsonArray = mapper.writeValueAsString(alternativas);  
-        
-        // deserialize JSON array into Java Array  
-        @SuppressWarnings("unchecked")  
-        List<Alternativa> data = mapper.readValue(jsonArray, List.class);  
+	public Questao saveQuestao(Questao questao) throws JsonProcessingException {
+		//Questao questao = new Questao();
+//		ObjectMapper mapper = new ObjectMapper();
+//		String jsonArray = mapper.writeValueAsString(alternativas);  
+//        
+//        // deserialize JSON array into Java Array  
+//        @SuppressWarnings("unchecked")  
+//        List<Alternativa> data = mapper.readValue(jsonArray, List.class);  
 		//questao.setDescricao(descricao.getBytes());
-		questao.setAlternativas(alternativas);
+		//questao.setAlternativas(alternativas);
 		//questao.setAlternativas(data);
 		return questRepository.save(questao);
 	}
@@ -55,13 +55,13 @@ public class QuestaoService {
 		questRepository.deleteById(id);
 	}
 
-	public Questao insertImage(Integer idQuestao, MultipartFile image) throws IOException {
+	public Questao insertImage(Integer idQuestao, MultipartFile descricao) throws IOException {
 		// final String PATH = "./src/main/resources/static/upload_questao/";
 		
 		Questao questao = questRepository.findById(idQuestao).orElseThrow();
 		//byte[] imagem;
 			
-			questao.setDescricao(image.getBytes());
+			questao.setDescricao(descricao.getBytes());
 
 			return questRepository.save(questao);
 		

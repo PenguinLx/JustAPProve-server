@@ -29,6 +29,8 @@ public class JustApProveApplication {
 	
 	https://www.youtube.com/watch?v=3ONGz-eSWlg&t=79s
 	
+	https://pt.stackoverflow.com/questions/375677/como-corrigir-o-erro-cannot-deserialize-from-object-value-no-delegate-or-prop
+	
 	SIM, EU PROCUREI EM TUDO ISSO E NÃO ACHEI A SOLUÇÃO ;-;
 	*/
 }
