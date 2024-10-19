@@ -24,15 +24,17 @@ public class QuestaoService {
 
 	public Questao saveQuestao(Questao questao) throws JsonProcessingException {
 		//Questao questao = new Questao();
-//		ObjectMapper mapper = new ObjectMapper();
-//		String jsonArray = mapper.writeValueAsString(alternativas);  
-//        
-//        // deserialize JSON array into Java Array  
-//        @SuppressWarnings("unchecked")  
-//        List<Alternativa> data = mapper.readValue(jsonArray, List.class);  
-		//questao.setDescricao(descricao.getBytes());
-		//questao.setAlternativas(alternativas);
-		//questao.setAlternativas(data);
+
+		if (questao.getAlternativas() != null) {
+			//VERIFICA SE AS ALTERNATIVAS SÃO NULAS
+            for (Alternativa alternativa : questao.getAlternativas()) {
+            	//ITERA SOBRE CADA ALTERNATIVA DA LISTA PARA REALIZAR OPERAÇÕES
+                alternativa.setQuestao(questao); 
+                //atribui a instância da Questao atual a cada uma das instâncias de Alternativa(da lista na classe questao)
+                // A Questao já possui uma lista de Alternativas associadas, mas a Alternativa também precisa saber a qual Questao ela pertence(Isso é necessário para que o JPA possa mapear corretamente a chave estrangeira (id_questao) na tabela de Alternativa no banco de dados. Sem essa atribuição, o campo id_questao na tabela Alternativa poderia ficar nulo, o que causaria problemas de integridade referencial no banco de dados)
+            }
+        }
+		
 		return questRepository.save(questao);
 	}
 

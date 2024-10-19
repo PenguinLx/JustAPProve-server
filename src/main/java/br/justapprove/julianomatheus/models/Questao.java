@@ -37,7 +37,7 @@ public class Questao  {
 	@Lob @Getter @Setter private byte[] descricao;
 	//using = JsonCollectionDeserializer.class
 	
-	@OneToMany(mappedBy = "questao", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "questao", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonProperty("alternativas")
 	//@JsonDeserialize(as=Questao.class, contentAs=Alternativa.class)
 	@Getter @Setter private List<Alternativa> alternativas;

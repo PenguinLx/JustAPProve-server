@@ -2,7 +2,9 @@ package br.justapprove.julianomatheus.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,9 +29,9 @@ public class Alternativa {
 	//@JsonProperty("descricao")
 	@Getter @Setter private String descricao;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "id_questao")
-	private Questao questao;
+	@Getter @Setter private Questao questao;
 	
 
 }
