@@ -33,5 +33,6 @@ public class Alternativa {
 	@JoinColumn(name = "id_questao")
 	@Getter @Setter private Questao questao;
 	
+	//https://stackoverflow.com/questions/4083702/posting-a-file-and-associated-data-to-a-restful-webservice-preferably-as-json
 
 }

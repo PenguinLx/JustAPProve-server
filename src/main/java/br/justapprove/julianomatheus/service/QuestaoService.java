@@ -10,9 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import br.justapprove.julianomatheus.datatransfer.AlternativaDT;
 import br.justapprove.julianomatheus.models.Alternativa;
 import br.justapprove.julianomatheus.models.Questao;
 import br.justapprove.julianomatheus.repositories.QuestaoRepository;
@@ -22,21 +23,28 @@ public class QuestaoService {
 	@Autowired
 	private QuestaoRepository questRepository; 
 
-	public Questao saveQuestao(Questao questao) throws JsonProcessingException {
-		//Questao questao = new Questao();
+	public Questao saveQuestao(MultipartFile descricao, String stringJson) throws IOException {
+        Questao questao = new Questao();
 
-		if (questao.getAlternativas() != null) {
-			//VERIFICA SE AS ALTERNATIVAS SÃO NULAS
-            for (Alternativa alternativa : questao.getAlternativas()) {
-            	//ITERA SOBRE CADA ALTERNATIVA DA LISTA PARA REALIZAR OPERAÇÕES
-                alternativa.setQuestao(questao); 
-                //atribui a instância da Questao atual a cada uma das instâncias de Alternativa(da lista na classe questao)
-                // A Questao já possui uma lista de Alternativas associadas, mas a Alternativa também precisa saber a qual Questao ela pertence(Isso é necessário para que o JPA possa mapear corretamente a chave estrangeira (id_questao) na tabela de Alternativa no banco de dados. Sem essa atribuição, o campo id_questao na tabela Alternativa poderia ficar nulo, o que causaria problemas de integridade referencial no banco de dados)
-            }
+        questao.setDescricao(descricao.getBytes());
+        List<AlternativaDT> alternativasDT = new ObjectMapper().readValue(stringJson, new TypeReference<List<AlternativaDT>>() {});
+        
+        List<Alternativa> alternativas = new ArrayList<>();
+        
+        // O que enviar pelo PostMan?
+        // Body -> form-data
+        // descricao File arquivo.fds
+        // alternativas Text [{"correta": 1, "descricao": "Alternativa correta"}, {"correta": 0, "descricao": "Alternativa errada"}, {"correta": 0, "descricao": "Alternativa errada"}]
+        for (AlternativaDT alternativaDT : alternativasDT) {
+            Alternativa alternativa = new Alternativa();
+            alternativa.setDescricao(alternativaDT.getDescricao());
+            alternativa.setCorreta(alternativaDT.isCorreta());
+            alternativa.setQuestao(questao);
+            alternativas.add(alternativa);
         }
-		
-		return questRepository.save(questao);
-	}
+        questao.setAlternativas(alternativas);
+        return questRepository.save(questao);
+    }
 
 	public Optional<Questao> readQuestao(@RequestBody Integer id) {
 		return questRepository.findById(id);
