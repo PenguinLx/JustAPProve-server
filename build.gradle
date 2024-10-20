@@ -30,6 +30,7 @@ repositories {
 	
 	testCompileOnly 'org.projectlombok:lombok:1.18.34'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+	
 }
 
 tasks.named('test') {

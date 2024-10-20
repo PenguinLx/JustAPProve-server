@@ -6,7 +6,7 @@ import lombok.Setter;
 public class LoginResponse {
 	@Getter @Setter private boolean resposta;
 	@Getter @Setter private Integer id;
-
+	
 	
 	
 	

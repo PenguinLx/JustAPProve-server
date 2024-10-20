@@ -4,9 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,13 +32,11 @@ public class Questao  {
 	@Getter private Integer id;
 	@Column(columnDefinition = "mediumblob")
 	@Lob @Getter @Setter private byte[] descricao;
-	//using = JsonCollectionDeserializer.class
 	
 	@OneToMany(mappedBy = "questao", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonProperty("alternativas")
-	//@JsonDeserialize(as=Questao.class, contentAs=Alternativa.class)
+	
 	@Getter @Setter private List<Alternativa> alternativas;
-								//ISSO DEVERIA MESMO SER UMA LIST DE 		Alternativa? - TALVEZ UMA DE STRING EM QUE É SETADO NO SERVICE DEPOIS A DESCRICAO NA LISTA DE STRINGS DAQUI
+								
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(
 			name="questao_simulado",

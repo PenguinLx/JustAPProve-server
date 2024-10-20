@@ -30,7 +30,6 @@ public class QuestaoController {
 
 	
 	@PostMapping("/save")
-	//@PostMapping(value = "/save", consumes = MediaType.ALL_VALUE, produces = MediaType.ALL_VALUE)
 	public Questao saveQuestao(@RequestParam("descricao") MultipartFile descricao, @RequestParam("alternativas") String stringJson) throws IOException{
 		return questService.saveQuestao(descricao, stringJson);
 	}

@@ -1,23 +1,47 @@
 package br.justapprove.julianomatheus.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import br.justapprove.julianomatheus.models.Usuario;
 import br.justapprove.julianomatheus.repositories.UsuarioRepository;
-import org.springframework.data.domain.Sort;
 @Service
 public class UsuarioService {
 	
 	@Autowired
 	private UsuarioRepository usrrepository;
 	
+//	public Usuario saveUsuario(@RequestBody Usuario usuario) {
+//		while (!verifyApelido(usuario)) {
+//			Random random = new Random();
+//			int randomNumber = random.nextInt(8999) + 1000;
+//            usuario.setApelido("Estudante" + randomNumber);
+//		}
+//		return usrrepository.save(usuario);
+//	}
+	
 	public Usuario saveUsuario(@RequestBody Usuario usuario) {
-		return usrrepository.save(usuario);
+		Usuario usrResposta = new Usuario();
+		while (!verifyApelido(usuario)) {
+			usuario.setApelido("Estudante" + randomizeNumber());
+		}
+		if (!verifyEmail(usuario)) {
+			usrResposta.setEmail("Email já está sendo utilizado");
+			return usrResposta;
+		} if (!checkRealEmail(usuario.getEmail())) {
+			usrResposta.setEmail("Email não conhecível");
+			return usrResposta;
+		} else {
+			return usrrepository.save(usuario);
+		}
+		
 	}
 	
 	public Usuario saveUsuarioEmail(Usuario usuario, @RequestBody String email) {
@@ -38,6 +62,60 @@ public class UsuarioService {
 	
 	public List<Usuario> readAllUsuariosByPontos() {
 		return usrrepository.findAll(Sort.by(Sort.Direction.DESC, "ponto"));
+	}
+	
+	public List<String> readAllUsuariosApelidos() {
+		List<Usuario> listaUsuarios = usrrepository.findAll();
+		List<String> apelidos = new ArrayList<String>();
+		
+		for (Usuario usuario : listaUsuarios) {
+			apelidos.add(usuario.getApelido());
+		}
+		return apelidos;
+	}
+	
+	public boolean verifyApelido(Usuario usuario) {
+		List<String> apelidos = readAllUsuariosApelidos();
+		
+		if (apelidos.size() == 0) {
+            usuario.setApelido("Estudante" + randomizeNumber());
+            return true;
+		}
+		
+		for (int x = 0; x<apelidos.size(); x++) {
+			if (usuario.getApelido() == null || usuario.getApelido().equals(apelidos.get(x))) {
+					return false;
+			}
+		}
+		return true;
+	}
+	
+	public List<String> readAllUsuariosEmails() {
+		List<Usuario> listaUsuarios = usrrepository.findAll();
+		List<String> emails = new ArrayList<String>();
+		
+		for (Usuario usuario : listaUsuarios) {
+			emails.add(usuario.getEmail());
+		}
+		return emails;
+	}
+	
+	public boolean verifyEmail(Usuario usuario) {
+		List<String> emails = readAllUsuariosEmails();
+		
+		for (int x = 0; x<emails.size(); x++) {
+			if (usuario.getEmail().equals(emails.get(x))) {
+					return false;
+			}
+		}
+	    return true;
+	}
+	
+	public boolean checkRealEmail(String email) {
+		String padrao = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(padrao);
+        java.util.regex.Matcher m = p.matcher(email);
+        return m.matches();
 	}
 	
 	public Usuario updateUsuario(@RequestBody Integer id, Usuario usuario) {
@@ -66,5 +144,11 @@ public class UsuarioService {
 	public void deleteUsuarioById(@RequestBody Integer id) {
 		usrrepository.deleteById(id);
 	}	
+	
+	public int randomizeNumber() {
+		Random random = new Random();
+		int randomNumber = random.nextInt(8999) + 1000;
+		return randomNumber;
+	}
 	
 }
