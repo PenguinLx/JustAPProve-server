@@ -61,17 +61,7 @@ public class UsuarioController {
 
 	@PostMapping("/login")
     public ResponseEntity<LoginResponse> userLogin(@RequestBody LoginRequest loginRequest) {
-        LoginResponse response = new LoginResponse();
-
-        if (usrService.readUsuarioByEmail(loginRequest.getEmail()).getEmail().equals(loginRequest.getEmail()) && 
-        		usrService.readUsuarioByEmail(loginRequest.getEmail()).getSenha().equals(loginRequest.getSenha())) {
-            response.setResposta(true);
-            response.setId(usrService.readUsuarioByEmail(loginRequest.getEmail()).getId());
-        } else {
-        	response.setResposta(false);
-        }
-
-        return ResponseEntity.ok(response);
+        return usrService.userLogin(loginRequest);
     }
 	@OnError()
 	public void onError() {

@@ -7,9 +7,12 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import br.justapprove.julianomatheus.models.LoginRequest;
+import br.justapprove.julianomatheus.models.LoginResponse;
 import br.justapprove.julianomatheus.models.Usuario;
 import br.justapprove.julianomatheus.repositories.UsuarioRepository;
 @Service
@@ -61,7 +64,21 @@ public class UsuarioService {
 	}
 	
 	public List<Usuario> readAllUsuariosByPontos() {
-		return usrrepository.findAll(Sort.by(Sort.Direction.DESC, "ponto"));
+		return usrrepository.findAll(Sort.by(Sort.Direction.DESC, "pontos"));
+	}
+	
+	public ResponseEntity<LoginResponse> userLogin(LoginRequest loginRequest) {
+		LoginResponse response = new LoginResponse();
+		
+		if (readUsuarioByEmail(loginRequest.getEmail()).getEmail().equals(loginRequest.getEmail()) && 
+        		readUsuarioByEmail(loginRequest.getEmail()).getSenha().equals(loginRequest.getSenha())) {
+            response.setResposta(true);
+            response.setId(readUsuarioByEmail(loginRequest.getEmail()).getId());
+        } else {
+        	response.setResposta(false);
+        }
+		
+		return ResponseEntity.ok(response);
 	}
 	
 	public List<String> readAllUsuariosApelidos() {
@@ -128,7 +145,13 @@ public class UsuarioService {
 			usr.setSenha(usuario.getSenha());	
 		}
 		if(usuario.getApelido() != null && !usuario.getApelido().isBlank()) {
-			usr.setApelido(usuario.getApelido());	
+			if (!verifyApelido(usuario)) {
+				usr.setApelido("Apelido já em uso");
+				return usr;
+			} else {
+				usr.setApelido(usuario.getApelido());	
+			}
+				
 		}
 		
 		usr.setImage(usuario.getImage());
