@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ public class Usuario {
 	@Getter private Integer id;
 	@Getter @Setter private String email;
 	@Getter @Setter private String senha;
-	@Getter @Setter private int ponto;
+	@Getter @Setter private int pontos;
 	@Getter	@Setter	private String apelido;
 	@Lob
 	@Column(columnDefinition = "longblob")

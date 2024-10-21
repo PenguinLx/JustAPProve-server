@@ -41,6 +41,5 @@ public class Materia {
 	//UMA MATERIA, MUITOS MATERIAIS(ONE TO MANY)
 	@OneToMany(mappedBy = "materia")
 	@Getter @Setter protected List<Material> materiais;
-	//@JoinColumn(name = "id_material")
 }
 

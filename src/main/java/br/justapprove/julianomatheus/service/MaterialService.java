@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import br.justapprove.julianomatheus.models.Materia;
 import br.justapprove.julianomatheus.models.Material;
 import br.justapprove.julianomatheus.repositories.MaterialRepository;
 
@@ -17,6 +18,8 @@ public class MaterialService {
 	private MaterialRepository matlRepository;
 	
 	public Material saveMaterial(@RequestBody Material material) {
+			Materia materia = new Materia();
+		
 		return matlRepository.save(material);
 	}
 	
@@ -31,7 +34,7 @@ public class MaterialService {
 	public Material updateMaterial(@RequestBody Material material, Integer id) {
 		Material matl = matlRepository.findById(id).orElseThrow();
 		matl.setArtigo(material.getArtigo());
-		matl.setVideo(material.getVideo());
+		matl.setVideoEmbedd(material.getVideoEmbedd());
 		return matlRepository.save(matl);
 	}
 	

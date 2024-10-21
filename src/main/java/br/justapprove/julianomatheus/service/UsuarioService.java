@@ -137,7 +137,7 @@ public class UsuarioService {
 	
 	public Usuario updatePontos(@RequestBody Integer id, Usuario usuario) {
 		Usuario usr = usrrepository.findById(id).orElseThrow();
-		usr.setPonto(usuario.getPonto());
+		usr.setPontos(usuario.getPontos());
 		return usrrepository.save(usr);
 	}
 	

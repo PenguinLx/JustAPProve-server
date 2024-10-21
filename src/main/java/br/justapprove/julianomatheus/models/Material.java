@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,10 +22,10 @@ public class Material {
 	@Getter private Integer id;
 	
 	@Getter @Setter private String artigo;
-	@Lob @Getter @Setter private byte[] video;
+	@Getter @Setter private String videoEmbedd;
 	//https://stackoverflow.com/questions/65655237/spring-boot-making-another-entity-class-object-in-entity-class
 	@ManyToOne
 	@JoinColumn(name = "id_materia")
-	private Materia materia;
+	@Getter @Setter private Materia materia;
 	
 }

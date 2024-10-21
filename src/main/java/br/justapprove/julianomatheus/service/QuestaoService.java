@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,12 +77,17 @@ public class QuestaoService {
 			return questRepository.save(questao);
 		
 	}
-	
-//	public String saveImage(MultipartFile image) {
-//		AlternativaRepository altRepo;
-//		Questao questao = questRepository.save(Questao.builder().alternativas(altRepo.findAll()).descricao(image.getBytes()).build());
-//		return;
-//	}
+	public List<Questao> numeroQuestoes(int numero) {
+		List<Questao> list = new ArrayList<>();
+		List<Questao> questoes = questRepository.findAll();
+		for(int x = 0; x< numero; x++) {
+			Random random = new Random();
+			int randomNumber = random.nextInt(questoes.size());
+			list.add(questoes.get(randomNumber));
+		}
+		return list;
+		 
+	}
 
 	public void deleteAllQuestoes() {
 		questRepository.deleteAll();

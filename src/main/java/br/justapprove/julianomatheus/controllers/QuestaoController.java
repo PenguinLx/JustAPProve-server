@@ -63,5 +63,9 @@ public class QuestaoController {
 	public void saveImage(@PathVariable("id") Integer idQuestao,@RequestParam("image") MultipartFile image) throws IOException {
 		questService.insertImage (idQuestao, image);
 	}
+	@PostMapping("/gerarSimulado")
+	public List<Questao> numeroQuestao(@RequestParam("numero") int numero){
+		return questService.numeroQuestoes(numero);
+	}
 	
 }
