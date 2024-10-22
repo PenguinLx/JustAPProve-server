@@ -22,7 +22,7 @@ import br.justapprove.julianomatheus.models.Questao;
 import br.justapprove.julianomatheus.service.QuestaoService;
 
 @RestController
-@RequestMapping("/questoes")
+@RequestMapping("/questao")
 public class QuestaoController {
 
 	@Autowired
@@ -63,9 +63,9 @@ public class QuestaoController {
 	public void saveImage(@PathVariable("id") Integer idQuestao,@RequestParam("image") MultipartFile image) throws IOException {
 		questService.insertImage (idQuestao, image);
 	}
-	@PostMapping("/gerarSimulado")
-	public List<Questao> numeroQuestao(@RequestParam("numero") int numero){
-		return questService.numeroQuestoes(numero);
+	@GetMapping("/gerarSimulado")
+	public List<Questao> gerarSimulado(@RequestParam("numero") int numero){
+		return questService.gerarSimulado(numero);
 	}
 	
 }

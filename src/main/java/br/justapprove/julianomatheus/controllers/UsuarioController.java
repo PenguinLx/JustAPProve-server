@@ -21,7 +21,7 @@ import br.justapprove.julianomatheus.service.UsuarioService;
 import jakarta.websocket.OnError;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/usuario")
 public class UsuarioController {
 	
 	@Autowired

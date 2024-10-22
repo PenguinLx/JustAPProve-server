@@ -1,5 +1,7 @@
 package br.justapprove.julianomatheus.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,6 +31,7 @@ public class Alternativa {
 	
 	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "id_questao")
+	@JsonIgnore //EVITA A SERIALIZAÇÃO CICLICA
 	@Getter @Setter private Questao questao;
 
 }

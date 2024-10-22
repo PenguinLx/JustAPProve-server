@@ -2,6 +2,7 @@ package br.justapprove.julianomatheus.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -77,16 +78,26 @@ public class QuestaoService {
 			return questRepository.save(questao);
 		
 	}
-	public List<Questao> numeroQuestoes(int numero) {
-		List<Questao> list = new ArrayList<>();
+	public List<Questao> gerarSimulado(int numero) {
+		//List<Questao> list = new ArrayList<>();
 		List<Questao> questoes = questRepository.findAll();
-		for(int x = 0; x< numero; x++) {
-			Random random = new Random();
-			int randomNumber = random.nextInt(questoes.size());
-			list.add(questoes.get(randomNumber));
-		}
-		return list;
-		 
+		
+		 Collections.shuffle(questoes);
+		 //EMBARALHA AS QUESTOES(SHUFFLE)
+//		Collections.shuffle(questoes);
+		return questoes.subList(0, numero);
+		
+		
+//		for(int x = 0; x < numero; x++) {
+//			Random random = new Random();
+//			int randomNumber = random.nextInt(questoes.size());
+//			Questao questSelec = questoes.get(randomNumber);
+//			list.add(questSelec);
+//			questoes.remove(randomNumber);
+//			
+//			
+//		}
+//		return list;
 	}
 
 	public void deleteAllQuestoes() {

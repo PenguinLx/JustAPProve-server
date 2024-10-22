@@ -15,7 +15,7 @@ import br.justapprove.julianomatheus.models.Simulado;
 import br.justapprove.julianomatheus.service.SimuladoService;
 
 @RestController
-@RequestMapping("/simulados")
+@RequestMapping("/simulado")
 public class SimuladoController {
 
 	@Autowired
