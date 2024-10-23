@@ -74,6 +74,7 @@ public class UsuarioService {
         		readUsuarioByEmail(loginRequest.getEmail()).getSenha().equals(loginRequest.getSenha())) {
             response.setResposta(true);
             response.setId(readUsuarioByEmail(loginRequest.getEmail()).getId());
+            response.setApelido(readUsuarioByEmail(loginRequest.getEmail()).getApelido());
         } else {
         	response.setResposta(false);
         }
@@ -145,7 +146,7 @@ public class UsuarioService {
 			usr.setSenha(usuario.getSenha());	
 		}
 		if(usuario.getApelido() != null && !usuario.getApelido().isBlank()) {
-			if (!verifyApelido(usuario)) {
+			if (!verifyApelido(usuario) || usuario.getApelido().equals("Apelido já em uso")) {
 				usr.setApelido("Apelido já em uso");
 				return usr;
 			} else {
