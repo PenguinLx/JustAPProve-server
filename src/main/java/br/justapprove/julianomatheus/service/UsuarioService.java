@@ -75,6 +75,7 @@ public class UsuarioService {
             response.setResposta(true);
             response.setId(readUsuarioByEmail(loginRequest.getEmail()).getId());
             response.setApelido(readUsuarioByEmail(loginRequest.getEmail()).getApelido());
+            response.setPontos(readUsuarioByEmail(loginRequest.getEmail()).getPontos());
         } else {
         	response.setResposta(false);
         }
