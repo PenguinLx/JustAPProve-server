@@ -30,10 +30,10 @@ public class ProvaAnteriorController {
 		
 		return provaService.saveProva(pdf, titulo);
 	}
-	@PutMapping("/savePdf/{id}")
+	//@PutMapping("/savePdf/{id}")
 	//@PutMapping(value = "/savePdf/{id}", headers = "Content-Type= multipart/form-data")
-	public void savePdf(@PathVariable("id") Integer id, @RequestParam MultipartFile pdf) {
-		 provaService.insertPdf(id, pdf);
+	public void savePdf(@PathVariable("id") Integer id, @RequestParam String pdf) {
+//		 provaService.insertPdf(id, pdf);
 	}
 
 	@GetMapping("/read/{id}")
@@ -46,9 +46,9 @@ public class ProvaAnteriorController {
 		return provaService.readAllProvas();
 	}
 
-	@PutMapping("/update")
-	public ProvaAnterior updateProva(ProvaAnterior provaAnterior) {
-		return provaService.updateProva(provaAnterior, provaAnterior.getId());
+	@PutMapping("/update/{id}")
+	public ProvaAnterior updateProva(ProvaAnterior provaAnterior, @PathVariable("id") Integer id) {
+		return provaService.updateProva(provaAnterior,id);
 	}
 	
 	@DeleteMapping("/delete/{id}")

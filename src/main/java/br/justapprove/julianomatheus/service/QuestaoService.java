@@ -81,6 +81,13 @@ public class QuestaoService {
 	public List<Questao> gerarSimulado(int numero) {
 		//List<Questao> list = new ArrayList<>();
 		List<Questao> questoes = questRepository.findAll();
+		if(numero > questoes.size()) {
+			List<Questao> listError = new ArrayList<>();
+			Questao quest = questoes.get(0);
+			quest.getAlternativas().get(0).setDescricao("ERRO: NUMERO REQUISITADO MAIOR DO QUE ESTÁ DISPONIVEL NO BANCO DE DADOS!");
+			listError.add(quest);
+			return listError;
+		}
 		
 		 Collections.shuffle(questoes);
 		 //EMBARALHA AS QUESTOES(SHUFFLE)
@@ -103,4 +110,5 @@ public class QuestaoService {
 	public void deleteAllQuestoes() {
 		questRepository.deleteAll();
 	}
+	
 }

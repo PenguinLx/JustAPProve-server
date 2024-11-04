@@ -9,7 +9,7 @@ public class LoginResponse {
 	@Getter @Setter private String apelido;
 	@Getter @Setter private int pontos;
 	
-	
+
 	
 	
 }

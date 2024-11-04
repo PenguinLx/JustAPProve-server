@@ -67,5 +67,6 @@ public class QuestaoController {
 	public List<Questao> gerarSimulado(@RequestParam("numero") int numero){
 		return questService.gerarSimulado(numero);
 	}
+
 	
 }

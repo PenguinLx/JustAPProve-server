@@ -25,18 +25,18 @@ public class ProvaAnteriorService {
 		provaAnterior.setPdf(pdf.getBytes());
 		return provaRepository.save(provaAnterior);
 	}
-	public void insertPdf(Integer id, MultipartFile pdf) {
-		ProvaAnterior prova = provaRepository.findById(id).orElseThrow();
-		byte[] pdfB;
-	    
-		try {
-			pdfB = pdf.getBytes();
-			prova.setPdf(pdfB);
-			provaRepository.save(prova);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	public void insertPdf(Integer id, MultipartFile pdf) {
+//		ProvaAnterior prova = provaRepository.findById(id).orElseThrow();
+//		byte[] pdfB;
+//	    
+//		try {
+//			pdfB = pdf.getBytes();
+//			prova.setPdf(pdfB);
+//			provaRepository.save(prova);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	public Optional<ProvaAnterior> readProva(@RequestBody Integer id) {
 		return provaRepository.findById(id);
