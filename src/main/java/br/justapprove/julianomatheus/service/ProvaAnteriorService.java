@@ -46,11 +46,11 @@ public class ProvaAnteriorService {
 		return provaRepository.findAll();
 	}
 
-	public ProvaAnterior updateProva(@RequestBody ProvaAnterior provaAnterior, Integer id) {
+	public ProvaAnterior updateProva(MultipartFile pdf, String titulo, Integer id) throws IOException {
 		
 	ProvaAnterior prova = provaRepository.findById(id).orElseThrow();
-	prova.setTitulo(provaAnterior.getTitulo());
-	prova.setPdf(provaAnterior.getPdf());
+	prova.setTitulo(titulo);
+	prova.setPdf(pdf.getBytes());
 	return provaRepository.save(prova);
 }
 	public void deleteProvaAnteriorById(@RequestBody Integer id) {

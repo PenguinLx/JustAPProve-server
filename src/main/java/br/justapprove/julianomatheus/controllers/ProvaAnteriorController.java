@@ -47,8 +47,8 @@ public class ProvaAnteriorController {
 	}
 
 	@PutMapping("/update/{id}")
-	public ProvaAnterior updateProva(ProvaAnterior provaAnterior, @PathVariable("id") Integer id) {
-		return provaService.updateProva(provaAnterior,id);
+	public ProvaAnterior updateProva(@RequestParam("pdf") MultipartFile pdf,@RequestParam("titulo") String titulo, @PathVariable("id") Integer id) throws IOException {
+		return provaService.updateProva(pdf,titulo,id);
 	}
 	
 	@DeleteMapping("/delete/{id}")
