@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.justapprove.julianomatheus.models.Materia;
+import br.justapprove.julianomatheus.models.TipoMateria;
 import br.justapprove.julianomatheus.service.MateriaService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 @RestController
 @RequestMapping("/materia")
@@ -25,7 +25,7 @@ public class MateriaController {
 	private MateriaService matService;
 	
 	@PostMapping("/save")
-	public Materia saveMateria(Materia materia) {
+	public Materia saveMateria(@RequestBody Materia materia) {
 		return matService.saveMateria(materia);
 	}
 	
@@ -38,10 +38,14 @@ public class MateriaController {
 	public List<Materia> readAllMaterias(){
 		return matService.readAllMaterias();
 	}
+	@GetMapping("/readAllByTipo/{tipo}")
+	public List<Materia> readAllMateriasByTipo(@PathVariable("tipo") TipoMateria tipo){
+		return matService.readAllMateriasByTipo(tipo);
+	}
 	
-	@PutMapping("/update")
-	public Materia updateMateria(Materia materia) {
-		return matService.updateMateria(materia, materia.getId());
+	@PutMapping("/update/{id}")
+	public Materia updateMateria(@PathVariable("id") Integer id, @RequestBody Materia materia) {
+		return matService.updateMateria(id, materia);
 	}
 	
 	@DeleteMapping("/delete/{id}")

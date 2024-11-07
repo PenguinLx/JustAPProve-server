@@ -33,7 +33,7 @@ public class MaterialService {
 	
 	public Material updateMaterial(@RequestBody Material material, Integer id) {
 		Material matl = matlRepository.findById(id).orElseThrow();
-		matl.setArtigo(material.getArtigo());
+		matl.setDescricao(material.getDescricao());
 		matl.setVideoEmbedd(material.getVideoEmbedd());
 		return matlRepository.save(matl);
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.annotations.JavaType;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -32,14 +33,14 @@ public class Materia {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter private Integer id;
 	
-	@Getter @Setter protected String nome;
-	@Getter @Setter protected String descricao;
+	@Getter @Setter private String nome;
+	
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "TipoMat")
-	@Getter @Setter protected TipoMateria tipo;
+	@Getter @Setter private TipoMateria tipo;
 	//UMA MATERIA, MUITOS MATERIAIS(ONE TO MANY)
-	@OneToMany(mappedBy = "materia")
-	@Getter @Setter protected List<Material> materiais;
+	@OneToMany(mappedBy = "materia", cascade = CascadeType.ALL, orphanRemoval = true)
+	@Getter @Setter private List<Material> materiais;
 }
 
