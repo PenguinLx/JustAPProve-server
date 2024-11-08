@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.justapprove.julianomatheus.models.Materia;
@@ -38,8 +39,8 @@ public class MateriaController {
 	public List<Materia> readAllMaterias(){
 		return matService.readAllMaterias();
 	}
-	@GetMapping("/readAllByTipo/{tipo}")
-	public List<Materia> readAllMateriasByTipo(@PathVariable("tipo") TipoMateria tipo){
+	@GetMapping("/readAllByTipo")
+	public List<Materia> readAllMateriasByTipo(@RequestParam("tipo") String tipo){
 		return matService.readAllMateriasByTipo(tipo);
 	}
 	

@@ -43,15 +43,29 @@ public class MateriaService {
 		return matRepository.findAll();
 	}
 	public List<Materia> readAllMateriasByTipo(String tipo){
-			return matRepository.findByTipo(tipo);
-				
-//				for(Materia materia: listMateria) {
-//					if(materia.getTipo() == tipo) {					
-//						
-//					}
-//				}
+		TipoMateria tipoM;
+		switch (tipo) {
+		
+		case "PORTUGUES":
+			tipoM = TipoMateria.PORTUGUES;
+			break;
+		case "MATEMATICA":
+			tipoM = TipoMateria.MATEMATICA;
+		break;
+		
+		case "GEOGRAFIA":
+			tipoM = TipoMateria.GEOGRAFIA;
+			break;
 			
+		case "HISTORIA":
+			tipoM =  TipoMateria.HISTORIA;
+			break;
 			
+			default:
+				tipoM = TipoMateria.DESCONHECIDO;
+				break;
+		}
+			return matRepository.findByTipo(tipoM);
 	}
 	
 	public Materia updateMateria(Integer id, Materia materia) {
