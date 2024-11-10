@@ -104,7 +104,7 @@ public class UsuarioService {
             return true;
 		}
 		
-		for (int x = 0; x<apelidos.size(); x++) {
+		for (int x = 0; x < apelidos.size(); x++) {
 			if (usuario.getApelido() == null || usuario.getApelido().equals(apelidos.get(x))) {
 					return false;
 			}
@@ -142,6 +142,11 @@ public class UsuarioService {
 	//public Usuario updateUsuario(@RequestBody Integer id, Usuario usuario) {
 	public Usuario updateUsuario(Integer id, String email, String senha, String apelido, MultipartFile fotoPerfil) throws IOException {
 		Usuario usr = usrrepository.findById(id).orElseThrow();
+		Usuario usuario = new Usuario();
+		usuario.setEmail(email);
+		usuario.setApelido(apelido);
+		usuario.setSenha(senha);
+		usuario.setImage(fotoPerfil.getBytes());
 		usr.setImage(fotoPerfil.getBytes());
 		if(email != null && !email.isBlank()) {
 			usr.setEmail(email);
@@ -151,7 +156,7 @@ public class UsuarioService {
 			usr.setSenha(senha);	
 		}
 		if(apelido != null && !apelido.isBlank()) {
-			if (apelido.equals("Apelido já em uso") || verifyApelido(usr) != true ) {
+			if (apelido.equals("Apelido já em uso") || !verifyApelido(usuario) ) {
 				usr.setApelido("Apelido já em uso");
 				return usr;
 			} else {
