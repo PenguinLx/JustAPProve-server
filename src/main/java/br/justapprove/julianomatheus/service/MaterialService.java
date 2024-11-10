@@ -42,7 +42,7 @@ public class MaterialService {
 //		List<Material> listMaterialByTipo;
 //matS.readAllMateriasByTipo(matl.get(0).getTipo().toString());
 		TipoMateria tipoM;
-		System.out.println(material.getTipo().toString());
+		//System.out.println(material.getTipo().toString());
 switch (tipo) {
 		
 		case "PORTUGUES":

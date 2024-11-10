@@ -1,5 +1,6 @@
 package br.justapprove.julianomatheus.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.justapprove.julianomatheus.models.LoginRequest;
 import br.justapprove.julianomatheus.models.LoginResponse;
@@ -137,27 +139,27 @@ public class UsuarioService {
         java.util.regex.Matcher m = p.matcher(email);
         return m.matches();
 	}
-	
-	public Usuario updateUsuario(@RequestBody Integer id, Usuario usuario) {
+	//public Usuario updateUsuario(@RequestBody Integer id, Usuario usuario) {
+	public Usuario updateUsuario(Integer id, String email, String senha, String apelido, MultipartFile fotoPerfil) throws IOException {
 		Usuario usr = usrrepository.findById(id).orElseThrow();
-		if(usuario.getEmail() != null && !usuario.getEmail().isBlank()) {
-			usr.setEmail(usuario.getEmail());
+		usr.setImage(fotoPerfil.getBytes());
+		if(email != null && !email.isBlank()) {
+			usr.setEmail(email);
 		}
 		
-		if(usuario.getSenha() != null && !usuario.getSenha().isBlank()) {
-			usr.setSenha(usuario.getSenha());	
+		if(senha != null && !senha.isBlank()) {
+			usr.setSenha(senha);	
 		}
-		if(usuario.getApelido() != null && !usuario.getApelido().isBlank()) {
-			if (!verifyApelido(usuario) || usuario.getApelido().equals("Apelido já em uso")) {
+		if(apelido != null && !apelido.isBlank()) {
+			if (apelido.equals("Apelido já em uso") || verifyApelido(usr) != true ) {
 				usr.setApelido("Apelido já em uso");
 				return usr;
 			} else {
-				usr.setApelido(usuario.getApelido());	
+				usr.setApelido(apelido);	
 			}
 				
 		}
 		
-		usr.setImage(usuario.getImage());
 		return usrrepository.save(usr);
 	}
 	
