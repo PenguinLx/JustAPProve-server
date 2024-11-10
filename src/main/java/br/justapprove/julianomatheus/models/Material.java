@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +30,10 @@ public class Material {
 	@Getter private Integer id;
 	
 	@Getter @Setter private String descricao;
+	@JsonIgnore
+	@Enumerated(EnumType.STRING)
+	@Column(name = "TipoMatl")
+	@Getter @Setter TipoMateria tipo;
 	@Column(columnDefinition = "mediumtext")
 	@Lob @Getter @Setter private String videoEmbedd;
 	//https://stackoverflow.com/questions/65655237/spring-boot-making-another-entity-class-object-in-entity-class
@@ -35,5 +41,9 @@ public class Material {
 	@JoinColumn(name = "id_materia")
 	@JsonIgnore
 	@Getter @Setter private Materia materia;
+	
+	
+	
+	
 	
 }

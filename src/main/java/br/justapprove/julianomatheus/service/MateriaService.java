@@ -28,6 +28,7 @@ public class MateriaService {
 		matl.setDescricao(materia.getMateriais().get(i).getDescricao());
 		matl.setVideoEmbedd(materia.getMateriais().get(i).getVideoEmbedd());
 		matl.setMateria(materia);
+		matl.setTipo(materia.getTipo());
 		materialList.add(matl);
 		}
 		
