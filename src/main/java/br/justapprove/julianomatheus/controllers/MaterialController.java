@@ -36,10 +36,10 @@ public class MaterialController {
 	public List<Material> readAllMateriais(){
 		return matlService.readAllMateriais();
 	}
-	@GetMapping("/readAllMateriasByTipoMateria")
-	public List<Material> readAllMateriaisByTipoMateria(@RequestParam("tipo") String tipo){
-		return matlService.readAllMateriaisByTipoMateria(tipo);
-	}
+//	@GetMapping("/readAllMateriasByTipoMateria")
+//	public List<Material> readAllMateriaisByTipoMateria(@RequestParam("tipo") String tipo){
+//		return matlService.readAllMateriaisByTipoMateria(tipo);
+//	}
 
 	
 	@PutMapping("/update")

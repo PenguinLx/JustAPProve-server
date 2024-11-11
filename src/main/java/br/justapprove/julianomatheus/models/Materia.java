@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table
+@Table(name = "materia")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Materia {
@@ -38,8 +38,8 @@ public class Materia {
 	@Column(name = "TipoMat")
 	@Getter @Setter private TipoMateria tipo;
 	//UMA MATERIA, MUITOS MATERIAIS(ONE TO MANY)
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name="material_id")
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) 
+	@JoinColumn(name="material_id", referencedColumnName = "id")
 	@Getter @Setter private Material material;
 }
 

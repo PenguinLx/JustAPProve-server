@@ -30,15 +30,13 @@ public class Material {
 	@Getter private Integer id;
 	
 	@Getter @Setter private String descricao;
-	@JsonIgnore
-	@Enumerated(EnumType.STRING)
-	@Column(name = "TipoMatl")
-	@Getter @Setter TipoMateria tipo;
+
 	@Column(columnDefinition = "mediumtext")
 	@Lob @Getter @Setter private String videoEmbedd;
 	//https://stackoverflow.com/questions/65655237/spring-boot-making-another-entity-class-object-in-entity-class
-	@OneToOne()
 	@JsonIgnore
+	@OneToOne
+	@JoinColumn(name ="materia_id")
 	@Getter @Setter private Materia materia;
 	
 	
