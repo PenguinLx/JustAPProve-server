@@ -13,7 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,8 +37,7 @@ public class Material {
 	@Column(columnDefinition = "mediumtext")
 	@Lob @Getter @Setter private String videoEmbedd;
 	//https://stackoverflow.com/questions/65655237/spring-boot-making-another-entity-class-object-in-entity-class
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "id_materia")
+	@OneToOne()
 	@JsonIgnore
 	@Getter @Setter private Materia materia;
 	

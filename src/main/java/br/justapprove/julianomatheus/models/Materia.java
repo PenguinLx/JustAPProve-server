@@ -2,8 +2,6 @@ package br.justapprove.julianomatheus.models;
 
 import java.util.List;
 
-import org.hibernate.annotations.JavaType;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,7 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,7 +38,8 @@ public class Materia {
 	@Column(name = "TipoMat")
 	@Getter @Setter private TipoMateria tipo;
 	//UMA MATERIA, MUITOS MATERIAIS(ONE TO MANY)
-	@OneToMany(mappedBy = "materia", cascade = CascadeType.ALL, orphanRemoval = true)
-	@Getter @Setter private List<Material> materiais;
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name="material_id")
+	@Getter @Setter private Material material;
 }
 

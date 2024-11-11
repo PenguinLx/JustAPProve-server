@@ -143,11 +143,7 @@ public class UsuarioService {
 	public Usuario updateUsuario(Integer id, String email, String senha, String apelido, MultipartFile fotoPerfil) throws IOException {
 		Usuario usr = usrrepository.findById(id).orElseThrow();
 		Usuario usuario = new Usuario();
-		usuario.setEmail(email);
 		usuario.setApelido(apelido);
-		usuario.setSenha(senha);
-		usuario.setImage(fotoPerfil.getBytes());
-		usr.setImage(fotoPerfil.getBytes());
 		if(email != null && !email.isBlank()) {
 			usr.setEmail(email);
 		}
