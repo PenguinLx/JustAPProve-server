@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,6 +41,7 @@ public class Materia {
 	//UMA MATERIA, MUITOS MATERIAIS(ONE TO MANY)
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) 
 	@JoinColumn(name="material_id", referencedColumnName = "id")
+	//@PrimaryKeyJoinColumn
 	@Getter @Setter private Material material;
 }
 
