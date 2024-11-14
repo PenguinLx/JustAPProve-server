@@ -15,7 +15,7 @@ public class UsuarioTeste {
 	
 	@PostConstruct
 	private void run() {
-		Usuario usr = new Usuario();
+		//Usuario usr = new Usuario();
 		//create
 //		usr.setEmail("cavalo#emailnumber1.com");
 //		usr.setApelido("Cavalo_Doido");

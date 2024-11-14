@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import br.justapprove.julianomatheus.models.LoginRequest;
 import br.justapprove.julianomatheus.models.LoginResponse;
 import br.justapprove.julianomatheus.models.Usuario;
@@ -78,6 +81,7 @@ public class UsuarioService {
             response.setId(readUsuarioByEmail(loginRequest.getEmail()).getId());
             response.setApelido(readUsuarioByEmail(loginRequest.getEmail()).getApelido());
             response.setPontos(readUsuarioByEmail(loginRequest.getEmail()).getPontos());
+            response.setImage(readUsuarioByEmail(loginRequest.getEmail()).getImage());
 		}
  else {
         	response.setResposta(false);
@@ -140,25 +144,31 @@ public class UsuarioService {
         return m.matches();
 	}
 	//public Usuario updateUsuario(@RequestBody Integer id, Usuario usuario) {
-	public Usuario updateUsuario(Integer id, String email, String senha, String apelido, MultipartFile fotoPerfil) throws IOException {
+	public Usuario updateUsuario(Integer id,  String json, MultipartFile fotoPerfil) throws IOException {
 		Usuario usr = usrrepository.findById(id).orElseThrow();
-		Usuario usuario = new Usuario();
-		usuario.setApelido(apelido);
-		if(email != null && !email.isBlank()) {
-			usr.setEmail(email);
+		Usuario usuario = new ObjectMapper().readValue(json, new TypeReference<Usuario>(){});
+		//Usuario usuario = new Usuario();
+		if(usuario.getEmail() != null && !usuario.getEmail().isBlank()) {
+			usr.setEmail(usuario.getEmail());
 		}
 		
-		if(senha != null && !senha.isBlank()) {
-			usr.setSenha(senha);	
+		if(usuario.getSenha() != null && !usuario.getSenha().isBlank()) {
+			usr.setSenha(usuario.getSenha());	
 		}
-		if(apelido != null && !apelido.isBlank()) {
-			if (apelido.equals("Apelido já em uso") || !verifyApelido(usuario) ) {
+		if(usuario.getApelido() != null && !usuario.getApelido().isBlank()) {
+			if (usuario.getApelido().equals("Apelido já em uso") || !verifyApelido(usuario) ) {
 				usr.setApelido("Apelido já em uso");
 				return usr;
-			} else {
-				usr.setApelido(apelido);	
+			} 
+			
+			
+			else {
+				usr.setApelido(usuario.getApelido());	
 			}
 				
+		}
+		if(fotoPerfil != null || !fotoPerfil.isEmpty()) {
+			usr.setImage(fotoPerfil.getBytes());
 		}
 		
 		return usrrepository.save(usr);

@@ -8,7 +8,7 @@ public class LoginResponse {
 	@Getter @Setter private Integer id;
 	@Getter @Setter private String apelido;
 	@Getter @Setter private int pontos;
-	
+	@Getter @Setter	private byte[] image;
 
 	
 	
