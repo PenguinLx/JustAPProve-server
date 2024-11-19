@@ -144,10 +144,9 @@ public class UsuarioService {
         return m.matches();
 	}
 	//public Usuario updateUsuario(@RequestBody Integer id, Usuario usuario) {
-	public Usuario updateUsuario(Integer id,  String json, MultipartFile fotoPerfil) throws IOException {
+	public Usuario updateUsuario(Integer id,  Usuario usuario) throws IOException {
 		Usuario usr = usrrepository.findById(id).orElseThrow();
-		Usuario usuario = new ObjectMapper().readValue(json, new TypeReference<Usuario>(){});
-		//Usuario usuario = new Usuario();
+		
 		if(usuario.getEmail() != null && !usuario.getEmail().isBlank()) {
 			usr.setEmail(usuario.getEmail());
 		}
@@ -167,8 +166,8 @@ public class UsuarioService {
 			}
 				
 		}
-		if(fotoPerfil != null || !fotoPerfil.isEmpty()) {
-			usr.setImage(fotoPerfil.getBytes());
+		if(usuario.getImage() != null){
+			usr.setImage(usuario.getImage());
 		}
 		
 		return usrrepository.save(usr);

@@ -49,8 +49,8 @@ public class UsuarioController {
 	}
 	
 	@PutMapping("/updateUsuario/{id}")
-	public Usuario updateUsuario(@PathVariable("id") Integer id, @RequestParam("usuario") String usuario, @RequestParam("fotoPerfil") MultipartFile fotoPerfil) throws IOException {
-		return usrService.updateUsuario(id, usuario, fotoPerfil);
+	public Usuario updateUsuario(@PathVariable("id") Integer id, @RequestBody Usuario usuario) throws IOException {
+		return usrService.updateUsuario(id, usuario);
 	}
 	
 	@PutMapping("/updatePonto/{id}")
