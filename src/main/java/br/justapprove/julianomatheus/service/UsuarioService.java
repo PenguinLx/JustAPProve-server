@@ -90,23 +90,18 @@ public class UsuarioService {
 		return ResponseEntity.ok(response);
 	}
 	
-//	public List<String> readAllUsuariosApelidos() {
-//		List<Usuario> listaUsuarios = usrrepository.findAll();
-//		List<String> apelidos = new ArrayList<String>();
-//		
-//		for (Usuario usuario : listaUsuarios) {
-//			apelidos.add(usuario.getApelido());
-//		}
-//		return apelidos;
-//	}
+	public List<String> readAllUsuariosApelidos() {
+		List<Usuario> listaUsuarios = usrrepository.findAll();
+		List<String> apelidos = new ArrayList<String>();
+		
+		for (Usuario usuario : listaUsuarios) {
+			apelidos.add(usuario.getApelido());
+		}
+		return apelidos;
+	}
 	
 	public boolean verifyApelido(Usuario usuario) {
-		List<Usuario> listaUsuarios = usrrepository.findAll();
-		List<String> apelidos = new ArrayList<>();
-		
-		for (Usuario usuarios : listaUsuarios) {
-			apelidos.add(usuarios.getApelido());
-		}
+		List<String> apelidos = readAllUsuariosApelidos();
 		
 		if (apelidos.size() == 0) {
             usuario.setApelido("Estudante" + randomizeNumber());
@@ -121,30 +116,27 @@ public class UsuarioService {
 		return true;
 	}
 	
-//	public List<String> readAllUsuariosEmails() {
-//		List<Usuario> listaUsuarios = usrrepository.findAll();
-//		List<String> emails = new ArrayList<String>();
-//		
-//		for (Usuario usuario : listaUsuarios) {
-//			emails.add(usuario.getEmail());
-//		}
-//		return emails;
-//	}
+	public List<String> readAllUsuariosEmails() {
+		List<Usuario> listaUsuarios = usrrepository.findAll();
+		List<String> emails = new ArrayList<String>();
+		
+		for (Usuario usuario : listaUsuarios) {
+			emails.add(usuario.getEmail());
+		}
+		return emails;
+	}
 	
 	public boolean verifyEmail(Usuario usuario) {
-		List<Usuario> listaUsuarios = usrrepository.findAll();
-		List<String> emails = new ArrayList<>();
+		List<String> emails = readAllUsuariosEmails();
 		
-		for (Usuario usuarios : listaUsuarios) {
-			emails.add(usuarios.getEmail());
-		}
-		for (int x = 0; x < emails.size(); x++) {
+		for (int x = 0; x<emails.size(); x++) {
 			if (usuario.getEmail().equals(emails.get(x))) {
 					return false;
 			}
 		}
 	    return true;
 	}
+	
 	public boolean verifySenha(int id, Usuario usuario) {
 		//List<Usuario> listaUsuarios = usrrepository.findAll();
 		Usuario usr = usrrepository.findById(id).orElseThrow();
@@ -153,9 +145,6 @@ public class UsuarioService {
 				return false;
 			}
 			 return true;
-		
-		
-
 	}
 	
 	public boolean checkRealEmail(String email) {
