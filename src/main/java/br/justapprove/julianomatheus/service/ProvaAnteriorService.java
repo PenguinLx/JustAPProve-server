@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,7 +44,7 @@ public class ProvaAnteriorService {
 	}
 	
 	public List<ProvaAnterior> readAllProvas(){
-		return provaRepository.findAll();
+		return provaRepository.findAll(Sort.by(Sort.Direction.DESC, "titulo"));
 	}
 
 	public ProvaAnterior updateProva(MultipartFile pdf, String titulo, Integer id) throws IOException {
