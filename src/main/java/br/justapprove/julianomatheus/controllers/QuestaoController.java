@@ -50,7 +50,7 @@ public class QuestaoController {
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public void deleteQuestao(@PathVariable("id") Integer id) {
+	public void deleteQuestao( @PathVariable("id") Integer id) {
 		questService.deleteQuestaoById(id);
 	}
 	

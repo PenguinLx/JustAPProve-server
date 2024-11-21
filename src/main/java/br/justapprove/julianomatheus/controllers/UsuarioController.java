@@ -58,8 +58,8 @@ public class UsuarioController {
 		return usrService.updatePontos(id, usuario);
 	}
 	@DeleteMapping("/delete/{id}")
-	public void deleteUsuario(@PathVariable("id") Integer id) {
-		 usrService.deleteUsuarioById(id);
+	public Usuario deleteUsuario(@PathVariable("id") Integer id) {
+		 return usrService.deleteUsuarioById(id);
 	}
 
 	@PostMapping("/login")

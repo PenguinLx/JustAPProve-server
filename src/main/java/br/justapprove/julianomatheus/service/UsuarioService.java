@@ -195,8 +195,9 @@ public class UsuarioService {
 		return usrrepository.save(usr);
 	}
 	
-	public void deleteUsuarioById(@RequestBody Integer id) {
-		usrrepository.deleteById(id);
+	public Usuario deleteUsuarioById(@RequestBody Integer id) {
+		 usrrepository.deleteById(id);
+		 return usrrepository.findById(id).orElseThrow();
 	}	
 	
 	public int randomizeNumber() {
