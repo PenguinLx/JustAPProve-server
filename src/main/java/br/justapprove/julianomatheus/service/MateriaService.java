@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -51,11 +52,11 @@ public class MateriaService {
 			tipoM =  TipoMateria.HISTORIA;
 			break;
 			
-			default:
-				tipoM = TipoMateria.DESCONHECIDO;
-				break;
+		default:
+			tipoM = TipoMateria.DESCONHECIDO;
+			break;
 		}
-			return matRepository.findByTipo(tipoM);
+			return matRepository.findByTipo(tipoM, Sort.by(Sort.Direction.ASC, "nome"));
 	}
 	
 	public Materia updateMateria(Integer id, Materia materia) {
