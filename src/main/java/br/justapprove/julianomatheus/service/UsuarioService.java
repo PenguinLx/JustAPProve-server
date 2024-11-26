@@ -26,6 +26,9 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usrrepository;
 	
+	@Autowired
+    private EmailService ems;
+	
 	public Usuario saveUsuario(@RequestBody Usuario usuario) {
 		Usuario usrResposta = new Usuario();
 		
@@ -232,7 +235,7 @@ public class UsuarioService {
 	        Usuario usuario = userOptional.get();
 	        usuario.setToken(generateToken());
 	        usuario.setTokenCreationDate(LocalDateTime.now());
-	        EmailService ems = new EmailService();
+	        
 	        ems.enviarEmail(email, "Recuperação de Senha", "Token: "+ usuario.getToken());
 	        usrrepository.save(usuario);
 	        return usuario.getToken();

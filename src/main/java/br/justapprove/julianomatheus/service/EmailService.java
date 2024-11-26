@@ -24,7 +24,7 @@ public class EmailService {
             helper.setText(texto, true); // `true` para HTML, `false` para texto simples
             
             // Configura o remetente com InternetAddress
-            helper.setFrom(new InternetAddress("no-reply@justapprove.com", "JustAPProve"));
+         helper.setFrom(new InternetAddress("no-reply@justapprove.com", "JustAPProve"));
 
             // Envia o e-mail
             mailSender.send(mensagem);
