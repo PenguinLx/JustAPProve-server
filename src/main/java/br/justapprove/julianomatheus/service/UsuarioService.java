@@ -37,13 +37,24 @@ public class UsuarioService {
 	
 	public Usuario saveUsuario(@RequestBody Usuario usuario) {
 		Usuario usrResposta = new Usuario();
-		while (!verifyApelido(usuario)) {
-			usuario.setApelido("Estudante" + randomizeNumber());
+		
+		if (usuario.getApelido() != null && !usuario.getApelido().isBlank()) {
+			if (usuario.getApelido().equals("Apelido já em uso") || !verifyApelido(usuario) ) {
+				usrResposta.setApelido("Apelido já em uso");
+				return usrResposta;
+			}
+		} else {
+			while (!verifyApelido(usuario)) {
+				usuario.setApelido("Estudante" + randomizeNumber());
+			}
 		}
+		
 		if (!verifyEmail(usuario)) {
 			usrResposta.setEmail("Email já está sendo utilizado");
 			return usrResposta;
-		} if (!checkRealEmail(usuario.getEmail())) {
+		} 
+		
+		if (!checkRealEmail(usuario.getEmail())) {
 			usrResposta.setEmail("Email não conhecível");
 			return usrResposta;
 		} else {
@@ -103,7 +114,7 @@ public class UsuarioService {
 	public boolean verifyApelido(Usuario usuario) {
 		List<String> apelidos = readAllUsuariosApelidos();
 		
-		if (apelidos.size() == 0) {
+		if (apelidos.size() == 0 && usuario.getApelido().isBlank()) {
             usuario.setApelido("Estudante" + randomizeNumber());
             return true;
 		}
