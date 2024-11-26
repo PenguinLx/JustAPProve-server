@@ -1,20 +1,19 @@
 package br.justapprove.julianomatheus.service;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.justapprove.julianomatheus.models.LoginRequest;
 import br.justapprove.julianomatheus.models.LoginResponse;
@@ -23,6 +22,7 @@ import br.justapprove.julianomatheus.repositories.UsuarioRepository;
 @Service
 public class UsuarioService {
 	
+    private static final long EXPIRE_SENHA_TOKEN = 60;//minutos
 	@Autowired
 	private UsuarioRepository usrrepository;
 	
@@ -207,4 +207,61 @@ public class UsuarioService {
 		return randomNumber;
 	}
 	
+	private String generateToken() {
+        StringBuilder token = new StringBuilder();
+
+        return token.append(UUID.randomUUID().toString())
+                .append(UUID.randomUUID().toString()).toString();
+    }
+	
+	 private boolean isTokenExpired(final LocalDateTime tokenCreationDate) {
+
+	        LocalDateTime now = LocalDateTime.now();
+	        Duration diff = Duration.between(tokenCreationDate, now);
+	        	boolean expirado = diff.toMinutes() >= EXPIRE_SENHA_TOKEN;
+	        return expirado;
+	    }
+	 
+	 public String forgotPass(String email){
+	        Optional<Usuario> userOptional = Optional.ofNullable(usrrepository.findByEmail(email));
+
+	        if(!userOptional.isPresent()){
+	            return "Email inválido!";
+	        }
+
+	        Usuario usuario = userOptional.get();
+	        usuario.setToken(generateToken());
+	        usuario.setTokenCreationDate(LocalDateTime.now());
+	        EmailService ems = new EmailService();
+	        ems.enviarEmail(email, "Recuperação de Senha", "Token: "+ usuario.getToken());
+	        usrrepository.save(usuario);
+	        return usuario.getToken();
+	    }
+	 public String resetPass(String token, String senhaN,String senhaN2){
+	        Optional<Usuario> userOptional = Optional.ofNullable(usrrepository.findByToken(token));
+
+	        if(!userOptional.isPresent()){
+	            return "Invalid token";
+	        }
+	        LocalDateTime tokenCreationDate = userOptional.get().getTokenCreationDate();
+
+	        if (isTokenExpired(tokenCreationDate)) {
+	            return "Token expirado.";
+
+	        }
+
+	        Usuario usuario = userOptional.get();
+	        if(senhaN.equals(senhaN2)) {
+	        	usuario.setSenha(senhaN);	
+	        }else {
+	        	return "As senhas não coincidem";
+	        }
+	        
+	        usuario.setToken(null);
+	        usuario.setTokenCreationDate(null);
+
+	        usrrepository.save(usuario);
+
+	        return "Senha recuperada com sucesso!";
+	    }
 }

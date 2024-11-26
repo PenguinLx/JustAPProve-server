@@ -7,4 +7,5 @@ import br.justapprove.julianomatheus.models.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 	Usuario findByEmail(String email);
+	Usuario findByToken(String token);
 }

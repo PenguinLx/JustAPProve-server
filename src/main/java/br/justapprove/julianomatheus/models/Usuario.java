@@ -1,6 +1,8 @@
 package br.justapprove.julianomatheus.models;
 
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,10 +22,15 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter private Integer id;
+	@Column(unique = true)
 	@Getter @Setter private String email;
 	@Getter @Setter private String senha;
+	@Getter @Setter private String token;
 	@Getter @Setter private int pontos;
+	@Column(unique = true)
 	@Getter	@Setter	private String apelido;
+	  @Column(columnDefinition = "TIMESTAMP")
+	   @Getter @Setter private LocalDateTime tokenCreationDate;
 	@Lob
 	@Column(columnDefinition = "longblob")
 	@Getter @Setter private byte[] image; 

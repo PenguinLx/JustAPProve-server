@@ -66,8 +66,15 @@ public class UsuarioController {
     public ResponseEntity<LoginResponse> userLogin(@RequestBody LoginRequest loginRequest) {
         return usrService.userLogin(loginRequest);
     }
-	@OnError()
-	public void onError() {
-	
+	@PostMapping("/esqueceu")
+	 public String forgotPass(@RequestParam("email")String email) {
+		return usrService.forgotPass(email);
 	}
-}
+	
+	@PutMapping("/reset")
+	 public String resetPass(@RequestParam("token") String token, @RequestParam("senhaN") String senhaN, @RequestParam("senhaN2") String senhaN2) {
+		
+		return usrService.resetPass(token, senhaN, senhaN2);
+		
+	}
+	}
