@@ -26,15 +26,6 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usrrepository;
 	
-//	public Usuario saveUsuario(@RequestBody Usuario usuario) {
-//		while (!verifyApelido(usuario)) {
-//			Random random = new Random();
-//			int randomNumber = random.nextInt(8999) + 1000;
-//            usuario.setApelido("Estudante" + randomNumber);
-//		}
-//		return usrrepository.save(usuario);
-//	}
-	
 	public Usuario saveUsuario(@RequestBody Usuario usuario) {
 		Usuario usrResposta = new Usuario();
 		
@@ -149,7 +140,6 @@ public class UsuarioService {
 	}
 	
 	public boolean verifySenha(int id, Usuario usuario) {
-		//List<Usuario> listaUsuarios = usrrepository.findAll();
 		Usuario usr = usrrepository.findById(id).orElseThrow();
 		
 			if (usuario.getSenha().equals(usr.getSenha())) {
@@ -164,7 +154,7 @@ public class UsuarioService {
         java.util.regex.Matcher m = p.matcher(email);
         return m.matches();
 	}
-	//public Usuario updateUsuario(@RequestBody Integer id, Usuario usuario) {
+
 	public Usuario updateUsuario(Integer id,  Usuario usuario) throws IOException {
 		Usuario usr = usrrepository.findById(id).orElseThrow();
 		
