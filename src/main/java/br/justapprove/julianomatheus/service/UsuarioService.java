@@ -217,26 +217,29 @@ public class UsuarioService {
 //        return token.append(UUID.randomUUID().toString())
 //                .append(UUID.randomUUID().toString()).toString();
    
-	return token.append(randomizeNumber()).toString();
+        return token.append(randomizeNumber()).toString();
 	}
 	
 	 private boolean isTokenExpired(final LocalDateTime tokenCreationDate) {
 
 	        LocalDateTime now = LocalDateTime.now();
 	        Duration diff = Duration.between(tokenCreationDate, now);
-	        	boolean expirado = diff.toMinutes() >= EXPIRE_SENHA_TOKEN;
+	        boolean expirado = diff.toMinutes() >= EXPIRE_SENHA_TOKEN;
 	        return expirado;
 	    }
 	 
-	 public String forgotPass(String email){
+	 public Usuario forgotPass(String email){
 	        Optional<Usuario> userOptional = Optional.ofNullable(usrrepository.findByEmail(email));
 
+	        Usuario usuarioResposta = new Usuario();
+	        
 	        if(!userOptional.isPresent()){
-	            return "Email inválido!";
+	        	usuarioResposta.setApelido("Email inválido!");
+	            return usuarioResposta;
 	        }
 
 	        Usuario usuario = userOptional.get();
-	        if(usuario.getToken().isEmpty() || isTokenExpired(usuario.getTokenCreationDate())) {
+	        if(usuario.getToken() == null || isTokenExpired(usuario.getTokenCreationDate())) {
 	        	usuario.setToken(generateToken());
 		        usuario.setTokenCreationDate(LocalDateTime.now());
 		        ems.enviarEmail(email, "Recuperação de Senha", "Código: "+ usuario.getToken());
@@ -244,11 +247,12 @@ public class UsuarioService {
 	        
 	        }
 	        else {
-	        	return "Código já gerado, aguarde "+ EXPIRE_SENHA_TOKEN + " minutos";
+	        	usuarioResposta.setApelido("Código já gerado, aguarde "+ EXPIRE_SENHA_TOKEN + " minutos");
+	            return usuarioResposta;
 	        }
 	        
 	       
-	        return usuario.getToken();
+	        return usuario;
 	    }
 	 public ResponseEntity<LoginResponse> logincod(LoginRequest loginRequest) {
 			LoginResponse response = new LoginResponse();
@@ -269,31 +273,4 @@ public class UsuarioService {
 			
 			return ResponseEntity.ok(response);
 		}
-	 public String resetPass(String token, String senhaN,String senhaN2){
-	        Optional<Usuario> userOptional = Optional.ofNullable(usrrepository.findByToken(token));
-
-	        if(!userOptional.isPresent()){
-	            return "Código inválido";
-	        }
-	        LocalDateTime tokenCreationDate = userOptional.get().getTokenCreationDate();
-
-	        if (isTokenExpired(tokenCreationDate)) {
-	            return "Código expirado";
-
-	        }
-
-	        Usuario usuario = userOptional.get();
-	        if(senhaN.equals(senhaN2)) {
-	        	usuario.setSenha(senhaN);	
-	        }else {
-	        	return "As senhas não coincidem";
-	        }
-	        
-	        usuario.setToken(null);
-	        usuario.setTokenCreationDate(null);
-
-	        usrrepository.save(usuario);
-
-	        return "Senha recuperada com sucesso!";
-	    }
 }

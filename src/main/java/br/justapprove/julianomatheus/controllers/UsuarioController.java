@@ -65,16 +65,10 @@ public class UsuarioController {
         return usrService.userLogin(loginRequest);
     }
 	@PostMapping("/esqueceu")
-	 public String forgotPass(@RequestParam("email")String email) {
+	 public Usuario forgotPass(@RequestParam("email") String email) {
 		return usrService.forgotPass(email);
 	}
 	
-	@PutMapping("/reset")
-	 public String resetPass(@RequestParam("token") String token, @RequestParam("senhaN") String senhaN, @RequestParam("senhaN2") String senhaN2) {
-		
-		return usrService.resetPass(token, senhaN, senhaN2);
-		
-	}
 	@PostMapping("/logincod")
 	 public ResponseEntity<LoginResponse> logincod(@RequestBody LoginRequest loginRequest) {
 		return usrService.logincod(loginRequest);
