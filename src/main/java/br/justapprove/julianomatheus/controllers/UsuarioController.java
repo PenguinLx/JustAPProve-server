@@ -15,13 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import br.justapprove.julianomatheus.models.LoginRequest;
 import br.justapprove.julianomatheus.models.LoginResponse;
 import br.justapprove.julianomatheus.models.Usuario;
 import br.justapprove.julianomatheus.service.UsuarioService;
-import jakarta.websocket.OnError;
 
 @RestController
 @RequestMapping("/usuario")
@@ -77,4 +75,8 @@ public class UsuarioController {
 		return usrService.resetPass(token, senhaN, senhaN2);
 		
 	}
+	@PostMapping("/logincod")
+	 public ResponseEntity<LoginResponse> logincod(@RequestBody LoginRequest loginRequest) {
+		return usrService.logincod(loginRequest);
+	 }
 	}

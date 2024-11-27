@@ -22,7 +22,7 @@ import br.justapprove.julianomatheus.repositories.UsuarioRepository;
 @Service
 public class UsuarioService {
 	
-    private static final long EXPIRE_SENHA_TOKEN = 60;//minutos
+    private static final long EXPIRE_SENHA_TOKEN = 15;//minutos
 	@Autowired
 	private UsuarioRepository usrrepository;
 	
@@ -211,11 +211,14 @@ public class UsuarioService {
 	}
 	
 	private String generateToken() {
+		
         StringBuilder token = new StringBuilder();
 
-        return token.append(UUID.randomUUID().toString())
-                .append(UUID.randomUUID().toString()).toString();
-    }
+//        return token.append(UUID.randomUUID().toString())
+//                .append(UUID.randomUUID().toString()).toString();
+   
+	return token.append(randomizeNumber()).toString();
+	}
 	
 	 private boolean isTokenExpired(final LocalDateTime tokenCreationDate) {
 
@@ -233,23 +236,49 @@ public class UsuarioService {
 	        }
 
 	        Usuario usuario = userOptional.get();
-	        usuario.setToken(generateToken());
-	        usuario.setTokenCreationDate(LocalDateTime.now());
+	        if(usuario.getToken().isEmpty() || isTokenExpired(usuario.getTokenCreationDate())) {
+	        	usuario.setToken(generateToken());
+		        usuario.setTokenCreationDate(LocalDateTime.now());
+		        ems.enviarEmail(email, "Recuperação de Senha", "Código: "+ usuario.getToken());
+		        usrrepository.save(usuario);
 	        
-	        ems.enviarEmail(email, "Recuperação de Senha", "Token: "+ usuario.getToken());
-	        usrrepository.save(usuario);
+	        }
+	        else {
+	        	return "Código já gerado, aguarde "+ EXPIRE_SENHA_TOKEN + " minutos";
+	        }
+	        
+	       
 	        return usuario.getToken();
 	    }
+	 public ResponseEntity<LoginResponse> logincod(LoginRequest loginRequest) {
+			LoginResponse response = new LoginResponse();
+			
+			if (readUsuarioByEmail(loginRequest.getEmail()).getEmail().equals(loginRequest.getEmail()) && 
+	        		readUsuarioByEmail(loginRequest.getEmail()).getToken().equals(loginRequest.getToken()) && !isTokenExpired(readUsuarioByEmail(loginRequest.getEmail()).getTokenCreationDate())) {
+	            response.setResposta(true);
+	            response.setId(readUsuarioByEmail(loginRequest.getEmail()).getId());
+	            response.setApelido(readUsuarioByEmail(loginRequest.getEmail()).getApelido());
+	            response.setPontos(readUsuarioByEmail(loginRequest.getEmail()).getPontos());
+	            response.setImage(readUsuarioByEmail(loginRequest.getEmail()).getImage());
+	            readUsuarioByEmail(loginRequest.getEmail()).setToken(null);
+	            readUsuarioByEmail(loginRequest.getEmail()).setTokenCreationDate(null);
+			}
+	 else {
+	        	response.setResposta(false);
+	        }
+			
+			return ResponseEntity.ok(response);
+		}
 	 public String resetPass(String token, String senhaN,String senhaN2){
 	        Optional<Usuario> userOptional = Optional.ofNullable(usrrepository.findByToken(token));
 
 	        if(!userOptional.isPresent()){
-	            return "Invalid token";
+	            return "Código inválido";
 	        }
 	        LocalDateTime tokenCreationDate = userOptional.get().getTokenCreationDate();
 
 	        if (isTokenExpired(tokenCreationDate)) {
-	            return "Token expirado.";
+	            return "Código expirado";
 
 	        }
 
