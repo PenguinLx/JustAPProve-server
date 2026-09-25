@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,6 @@ import br.justapprove.julianomatheus.datatransfer.AlternativaDT;
 import br.justapprove.julianomatheus.models.Alternativa;
 import br.justapprove.julianomatheus.models.Questao;
 import br.justapprove.julianomatheus.repositories.QuestaoRepository;
-
 @Service
 public class QuestaoService {
 	@Autowired
