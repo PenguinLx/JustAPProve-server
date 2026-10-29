@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,10 +19,11 @@ import br.justapprove.julianomatheus.datatransfer.AlternativaDT;
 import br.justapprove.julianomatheus.models.Alternativa;
 import br.justapprove.julianomatheus.models.Questao;
 import br.justapprove.julianomatheus.repositories.QuestaoRepository;
+@RequiredArgsConstructor
 @Service
 public class QuestaoService {
-	@Autowired
-	private QuestaoRepository questRepository; 
+
+	private final QuestaoRepository questRepository;
 
 	public Questao saveQuestao(MultipartFile descricao, String stringJson) throws IOException {
         Questao questao = new Questao();

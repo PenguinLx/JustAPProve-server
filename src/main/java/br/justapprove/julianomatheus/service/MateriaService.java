@@ -3,6 +3,7 @@ package br.justapprove.julianomatheus.service;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -11,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import br.justapprove.julianomatheus.models.Materia;
 import br.justapprove.julianomatheus.models.TipoMateria;
 import br.justapprove.julianomatheus.repositories.MateriaRepository;
-
+@RequiredArgsConstructor
 @Service
 public class MateriaService {
 
 	@Autowired
-	private MateriaRepository matRepository; 
+	private final MateriaRepository matRepository;
 	
 	public Materia saveMateria(Materia materia) {
 		return matRepository.save(materia);

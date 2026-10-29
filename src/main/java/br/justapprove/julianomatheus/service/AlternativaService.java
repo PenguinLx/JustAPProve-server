@@ -3,18 +3,18 @@ package br.justapprove.julianomatheus.service;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import br.justapprove.julianomatheus.models.Alternativa;
 import br.justapprove.julianomatheus.repositories.AlternativaRepository;
-
+@RequiredArgsConstructor
 @Service
 public class AlternativaService {
 
-	@Autowired
-	private AlternativaRepository altRepository;
+	private final AlternativaRepository altRepository;
 	
 	
 	public Alternativa saveAlternativa(Alternativa alternativa) {

@@ -3,6 +3,8 @@ package br.justapprove.julianomatheus.controllers;
 import java.io.IOException;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,13 +22,13 @@ import br.justapprove.julianomatheus.models.LoginRequest;
 import br.justapprove.julianomatheus.models.LoginResponse;
 import br.justapprove.julianomatheus.models.Usuario;
 import br.justapprove.julianomatheus.service.UsuarioService;
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
-	
-	@Autowired
-	private UsuarioService usrService;
+
+	private final UsuarioService usrService;
+
 	@PostMapping("/saveUser")
 	public Usuario save(@RequestBody Usuario usuario) {
 		return usrService.saveUsuario(usuario);

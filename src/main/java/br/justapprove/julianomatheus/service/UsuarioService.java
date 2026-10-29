@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -18,16 +19,16 @@ import br.justapprove.julianomatheus.models.LoginRequest;
 import br.justapprove.julianomatheus.models.LoginResponse;
 import br.justapprove.julianomatheus.models.Usuario;
 import br.justapprove.julianomatheus.repositories.UsuarioRepository;
+@RequiredArgsConstructor
 @Service
 public class UsuarioService {
 	
     private static final long EXPIRE_SENHA_TOKEN = 15;//minutos
-	@Autowired
-	private UsuarioRepository usrrepository;
+
+	private final UsuarioRepository usrrepository;
 	
-	@Autowired
-    private EmailService ems;
-	
+	private final EmailService ems;
+
 	public Usuario saveUsuario(@RequestBody Usuario usuario) {
 		Usuario usrResposta = new Usuario();
 		

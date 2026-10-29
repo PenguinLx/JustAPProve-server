@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.justapprove.julianomatheus.models.ProvaAnterior;
 import br.justapprove.julianomatheus.repositories.ProvaAnteriorRepository;
-
+@RequiredArgsConstructor
 @Service
 public class ProvaAnteriorService {
 
-	@Autowired
-	private ProvaAnteriorRepository provaRepository;
+
+	private final ProvaAnteriorRepository provaRepository;
 
 	public ProvaAnterior saveProva(MultipartFile pdf, String titulo) throws IOException {
 		ProvaAnterior provaAnterior = new ProvaAnterior();
