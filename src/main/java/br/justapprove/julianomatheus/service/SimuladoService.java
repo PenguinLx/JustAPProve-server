@@ -3,18 +3,19 @@ package br.justapprove.julianomatheus.service;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import br.justapprove.julianomatheus.models.Simulado;
 import br.justapprove.julianomatheus.repositories.SimuladoRepository;
-
+@RequiredArgsConstructor
 @Service
 public class SimuladoService {
 
 	@Autowired
-	private SimuladoRepository simRepository;
+	private final SimuladoRepository simRepository;
 	
 	
 	public Simulado saveSimulado(@RequestBody Simulado simulado) {

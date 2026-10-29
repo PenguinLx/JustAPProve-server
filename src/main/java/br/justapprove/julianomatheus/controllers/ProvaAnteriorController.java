@@ -3,6 +3,7 @@ package br.justapprove.julianomatheus.controllers;
 import java.io.IOException;
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +18,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.justapprove.julianomatheus.models.ProvaAnterior;
 import br.justapprove.julianomatheus.service.ProvaAnteriorService;
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/prova")
 public class ProvaAnteriorController {
 
-	@Autowired
-	private ProvaAnteriorService provaService;
+	private final ProvaAnteriorService provaService;
 
 	@PostMapping("/save")
 	public ProvaAnterior saveProva(@RequestParam("pdf") MultipartFile pdf,@RequestParam("titulo") String titulo) throws IOException {

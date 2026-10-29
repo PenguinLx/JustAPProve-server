@@ -3,6 +3,7 @@ package br.justapprove.julianomatheus.controllers;
 import java.io.IOException;
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,13 +21,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import br.justapprove.julianomatheus.models.Questao;
 import br.justapprove.julianomatheus.service.QuestaoService;
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/questao")
 public class QuestaoController {
 
-	@Autowired
-	private QuestaoService questService;
+	private final QuestaoService questService;
 
 	
 	@PostMapping("/save")
